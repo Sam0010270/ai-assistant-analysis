@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 通用助手分析</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <style>
+    body {
+      background: #F9F8F4;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: rgba(124, 29, 29, 0.12);
+    }
+
+    /* ===== Cover ===== */
+    .cover {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 80px 24px 64px;
+      text-align: center;
+    }
+
+    .cover-label {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 600;
+      color: #666660;
+      letter-spacing: 0.12em;
+      margin-bottom: 32px;
+    }
+
+    .cover-title {
+      font-family: var(--font-sans);
+      font-size: 80px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #000000;
+      margin-bottom: 36px;
+    }
+
+    .cover-desc {
+      font-size: 26px;
+      color: #000000;
+      line-height: 1.8;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* ===== Tree section ===== */
+    .tree-section {
+      background: #F9F8F4;
+      padding: 16px 0 100px;
+    }
+
+    .sketch-defs {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    /* ===== Tree map layout ===== */
+    .tree-map {
+      --tree-bg: #F9F8F4;
+      --tree-line: #4A4846;
+      --tree-line-w: 2.8px;
+      --tree-stroke-w: 6px;
+      --tree-font: "Noto Sans SC", "PingFang SC", system-ui, sans-serif;
+      --d0-bg: #1C1C1A;
+      --d1-bg: #3A3836;
+      --d2-bg: #5C5955;
+      --d3-bg: #827E78;
+      --d4-bg: #B5B1A9;
+
+      position: relative;
+      display: inline-block;
+      padding: 0 20px;
+      font-family: var(--tree-font);
+    }
+
+    .tree-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 0;
+    }
+
+    .tree-lines path {
+      stroke: var(--tree-line);
+      stroke-width: var(--tree-stroke-w);
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .tree-container {
+      overflow-x: auto;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      display: flex;
+      justify-content: center;
+      padding: 0 20px 20px;
+    }
+
+    /* Layout helpers */
+    .tm-root {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .tm-cols {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .tm-cols-sub {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 44px;
+    }
+
+    .tm-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tm-children {
+      display: flex;
+      gap: 6px;
+      margin-top: 44px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 380px;
+    }
+
+    .tm-children-tight {
+      display: flex;
+      gap: 4px;
+      margin-top: 40px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ===== Node styles ===== */
+    .node {
+      position: relative;
+      display: inline-block;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-decoration: none;
+      white-space: nowrap;
+      text-align: center;
+      cursor: pointer;
+      isolation: isolate;
+      transition: transform 0.2s;
+      z-index: 1;
+    }
+
+    .node::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--d1-bg);
+      border: var(--tree-line-w) solid rgba(0,0,0,0.15);
+      border-radius: 16px 10px 18px 8px;
+      filter: url(#sketch);
+      z-index: -1;
+      transition: box-shadow 0.2s;
+    }
+
+    .node:hover { transform: translateY(-2px); }
+    .node:hover::after { box-shadow: 0 5px 16px rgba(0,0,0,0.12); }
+
+    .node.r2::after { border-radius: 10px 18px 8px 16px; }
+    .node.r3::after { border-radius: 8px 14px 16px 10px; }
+    .node.r4::after { border-radius: 18px 8px 12px 16px; }
+    .node.r5::after { border-radius: 14px 16px 10px 18px; }
+
+    .node.t1 { transform: rotate(-0.7deg); }
+    .node.t2 { transform: rotate(0.5deg); }
+    .node.t3 { transform: rotate(-0.4deg); }
+    .node.t4 { transform: rotate(0.8deg); }
+    .node.t5 { transform: rotate(-0.5deg); }
+    .node.t1:hover, .node.t2:hover, .node.t3:hover,
+    .node.t4:hover, .node.t5:hover {
+      transform: translateY(-2px) rotate(0deg);
+    }
+
+    /* Depth styles */
+    .node.root {
+      font-size: 24px;
+      font-weight: 900;
+      padding: 16px 36px;
+      letter-spacing: 0.02em;
+    }
+    .node.root::after {
+      background: var(--d0-bg);
+      border-color: var(--d0-bg);
+      border-radius: 20px 12px 22px 10px;
+    }
+
+    .node.lv1 {
+      font-size: 18px;
+      font-weight: 700;
+      padding: 12px 22px;
+    }
+    .node.lv1::after {
+      background: var(--d1-bg);
+      border-color: rgba(0,0,0,0.1);
+    }
+
+    .node.lv2 {
+      font-size: 16px;
+      font-weight: 700;
+      padding: 10px 18px;
+    }
+    .node.lv2::after {
+      background: var(--d2-bg);
+      border-color: rgba(0,0,0,0.08);
+    }
+
+    .node.lv3 {
+      font-size: 15px;
+      font-weight: 600;
+      padding: 10px 16px;
+      color: #1C1C1A;
+    }
+    .node.lv3::after {
+      background: var(--d4-bg);
+      border-color: rgba(0,0,0,0.06);
+    }
+    .node.lv3.lv3-dark::after {
+      background: var(--d3-bg);
+    }
+
+    .node.lv4 {
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 14px;
+      color: #1C1C1A;
+    }
+    .node.lv4::after {
+      background: var(--d4-bg);
+      border-color: rgba(0,0,0,0.06);
+    }
+
+    .node-sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: #171717;
+      margin-top: 2px;
+    }
+
+    .node.muted::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--tree-bg);
+      border: var(--tree-line-w) solid var(--tree-bg);
+      border-radius: 16px 10px 18px 8px;
+      filter: url(#sketch);
+      z-index: -2;
+    }
+    .node.muted.r2::before { border-radius: 10px 18px 8px 16px; }
+    .node.muted.r3::before { border-radius: 8px 14px 16px 10px; }
+    .node.muted.r4::before { border-radius: 18px 8px 12px 16px; }
+    .node.muted.r5::before { border-radius: 14px 16px 10px 18px; }
+
+    .node.muted::after {
+      border-style: dashed;
+      opacity: 0.75;
+    }
+    .node.muted { opacity: 0.8; }
+
+    .sup-label {
+      font-size: 11px;
+      color: #8A8A84;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes coverFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cover-label { animation: coverFadeIn 0.6s ease both 0.1s; }
+    .cover-title { animation: coverFadeIn 0.6s ease both 0.25s; }
+    .cover-desc  { animation: coverFadeIn 0.6s ease both 0.4s; }
+
+    @keyframes nodeIn {
+      from { opacity: 0; transform: translateY(-14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-d0 { animation: nodeIn 0.6s ease both 0.8s; }
+    .anim-d1 { animation: nodeIn 0.5s ease both 1.2s; }
+    .anim-d2 { animation: nodeIn 0.5s ease both 1.6s; }
+    .anim-d3 { animation: nodeIn 0.5s ease both 2.0s; }
+    .anim-d4 { animation: nodeIn 0.5s ease both 2.4s; }
+
+    @media (max-width: 640px) {
+      .cover {
+        padding: 48px 20px 40px;
+      }
+      .cover-title {
+        font-size: 36px;
+      }
+      .cover-desc {
+        font-size: 17px;
+      }
+      .tree-section {
+        padding: 32px 0 60px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <svg class="sketch-defs">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="sketch-line" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="4" seed="8" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Cover -->
+  <header class="cover">
+    <div class="cover-label">竞品分析</div>
+    <h1 class="cover-title">AI 通用助手分析</h1>
+    <p class="cover-desc">以贴近本质的视角，对 ChatGPT、Claude、豆包、Kimi 四款<strong style="white-space:nowrap;color:#000000;font-weight:900">对话式 AI 通用助手 app</strong> 进行竞品分析</p>
+    <div class="cover-label" style="margin-top:32px;margin-bottom:0">2026.6.12</div>
+  </header>
+
+  <!-- Tree Diagram -->
+  <section class="tree-section">
+    <div class="tree-container">
+      <div class="tree-map" id="treeMap">
+        <svg class="tree-lines" id="treeLines"></svg>
+
+        <!-- Root -->
+        <div class="tm-root">
+          <span class="node root anim-d0 t1" data-id="root">分析框架</span>
+        </div>
+
+        <!-- Level 1: 3 columns -->
+        <div class="tm-cols">
+          <!-- Left: 入选和分析逻辑 -->
+          <div class="tm-branch" style="margin-left: 21px;">
+            <a class="node lv1 anim-d1 r2 t2" data-id="selection" data-parent="root" href="pages/selection.html">入选和分析逻辑</a>
+          </div>
+
+          <!-- 产品概况 -->
+          <div class="tm-branch" style="margin-left:180px">
+            <a class="node lv1 anim-d1 r4 t3" data-id="overview" data-parent="root" href="pages/overview.html">产品概况</a>
+          </div>
+
+          <!-- Right: 能力公式 -->
+          <div class="tm-branch" style="margin-left:-40px">
+            <span class="node lv1 anim-d1 t2" data-id="formula" data-parent="root">能力对比</span>
+
+            <div class="tm-cols-sub">
+              <!-- 模型层 -->
+              <div class="tm-branch">
+                <a class="node lv2 anim-d2 r3 t4" data-id="model" data-parent="formula" href="pages/model.html">模型层</a>
+                <div class="tm-children-tight">
+                  <a class="node lv3 anim-d3 r5 t1" data-id="flagship" data-parent="model" href="pages/model-info.html">旗舰模型<br>基本信息</a>
+                  <a class="node lv3 anim-d3 r2 t5" data-id="benchmark" data-parent="model" href="pages/model-benchmark.html">Benchmark<br>数据</a>
+                  <a class="node lv3 anim-d3 r4 t3" data-id="lm-arena" data-parent="model" href="pages/model-arena.html">LM Arena</a>
+                </div>
+              </div>
+
+              <!-- 应用层 -->
+              <div class="tm-branch" style="margin-left: 90px;">
+                <a class="node lv2 anim-d2 r5 t1" data-id="app" data-parent="formula" href="pages/application.html">应用层</a>
+                <div class="tm-cols-sub" data-align-parent="app" data-align-child="action" style="gap:8px;margin-top:40px">
+                  <!-- 信息边界 -->
+                  <div class="tm-branch">
+                    <a class="node lv3 lv3-dark anim-d3 r2 t2" data-id="info" data-parent="app" href="pages/application.html#info-boundary" style="color:#fff">信息边界</a>
+                    <div class="tm-children-tight">
+                      <a class="node lv4 anim-d4 r3 t4" data-id="memory" data-parent="info" href="pages/app-memory.html">记忆系统</a>
+                      <a class="node lv4 anim-d4 r5 t1" data-id="private" data-parent="info" href="pages/app-private-info.html">用户私有信息</a>
+                      <a class="node lv4 anim-d4 r4 t5" data-id="realtime" data-parent="info" href="pages/app-realtime.html">实时信息</a>
+                    </div>
+                  </div>
+                  <!-- 行动边界 -->
+                  <div class="tm-branch">
+                    <a class="node lv3 lv3-dark anim-d3 r4 t5" data-id="action" data-parent="app" href="pages/application.html#action-boundary" style="color:#fff">行动边界</a>
+                    <div class="tm-children-tight">
+                      <a class="node lv4 anim-d4 r2 t3" data-id="sandbox" data-parent="action" href="pages/app-sandbox.html">内部沙箱<br>及其产物</a>
+                      <a class="node lv4 anim-d4 r5 t1" data-id="external" data-parent="action" href="pages/app-external.html">外部系统<br>及其产物</a>
+                    </div>
+                  </div>
+                  <!-- 补充维度 -->
+                  <div class="tm-branch" style="margin-top: 60px; margin-left: 30px;">
+                    <a class="node lv3 lv3-dark anim-d3 r3 t4" data-id="supplementary" data-parent="app" href="pages/application.html#supplementary" style="color:#fff">补充维度</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: 思考 -->
+          <div class="tm-branch" style="margin-left: -120px;">
+            <a class="node lv1 anim-d1 r3 t5" data-id="thoughts" data-parent="root" href="pages/thoughts.html">思考</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 下一页按钮 -->
+  <nav class="page-nav page-nav--end" style="max-width:1400px;margin:0 auto;padding:0 60px 100px">
+    <a class="page-nav-link page-nav-link--next" href="pages/selection.html">
+      <span class="page-nav-label">下一页</span>
+      <span class="page-nav-title">入选和分析逻辑</span>
+    </a>
+  </nav>
+
+  <script>
+    function drawTreeLines() {
+      var svg = document.getElementById('treeLines');
+      var map = document.getElementById('treeMap');
+      var alignedGroup = document.querySelector('[data-align-parent][data-align-child]');
+
+      if (alignedGroup) {
+        alignedGroup.style.position = 'relative';
+        alignedGroup.style.left = '0px';
+
+        var alignedParent = document.querySelector('[data-id="' + alignedGroup.dataset.alignParent + '"]');
+        var alignedChild = document.querySelector('[data-id="' + alignedGroup.dataset.alignChild + '"]');
+        if (alignedParent && alignedChild) {
+          var alignedParentRect = alignedParent.getBoundingClientRect();
+          var alignedChildRect = alignedChild.getBoundingClientRect();
+          var alignedParentX = alignedParentRect.left + alignedParentRect.width / 2;
+          var alignedChildX = alignedChildRect.left + alignedChildRect.width / 2;
+          alignedGroup.style.left = (alignedParentX - alignedChildX).toFixed(2) + 'px';
+        }
+      }
+
+      var mapRect = map.getBoundingClientRect();
+      var lineHalfWidth = parseFloat(getComputedStyle(map).getPropertyValue('--tree-stroke-w')) / 2;
+
+      svg.setAttribute('width', map.scrollWidth);
+      svg.setAttribute('height', map.scrollHeight);
+      svg.style.width = map.scrollWidth + 'px';
+      svg.style.height = map.scrollHeight + 'px';
+
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+      var children = document.querySelectorAll('[data-parent]');
+      var groups = {};
+      var alignedChildByParent = {
+        model: 'benchmark',
+        app: 'action'
+      };
+      children.forEach(function(child) {
+        var pid = child.dataset.parent;
+        if (!groups[pid]) groups[pid] = [];
+        groups[pid].push(child);
+      });
+
+      Object.keys(groups).forEach(function(parentId) {
+        var parent = document.querySelector('[data-id="' + parentId + '"]');
+        if (!parent) return;
+
+        var childNodes = groups[parentId];
+        var pRect = parent.getBoundingClientRect();
+        var px = Math.round(pRect.left + pRect.width / 2 - mapRect.left);
+        var py = Math.round(pRect.bottom - mapRect.top);
+
+        var positions = childNodes.map(function(c) {
+          var r = c.getBoundingClientRect();
+          var y = Math.round(r.top - mapRect.top);
+          return {
+            x: c.dataset.id === alignedChildByParent[parentId]
+              ? px
+              : Math.round(r.left + r.width / 2 - mapRect.left),
+            y: y,
+            endY: y + lineHalfWidth
+          };
+        });
+
+        var minY = Math.min.apply(null, positions.map(function(p) { return p.y; }));
+        var midY = Math.round(py + (minY - py) * 0.5);
+
+        addPath(svg, px, py, px, midY);
+
+        if (positions.length > 1) {
+          var xs = positions.map(function(p) { return p.x; });
+          xs.push(px);
+          var minX = Math.min.apply(null, xs);
+          var maxX = Math.max.apply(null, xs);
+          addPath(svg, minX, midY, maxX, midY);
+        }
+
+        positions.forEach(function(c) {
+          addPath(svg, c.x, midY, c.x, c.endY);
+        });
+      });
+    }
+
+    function sketchLine(x1, y1, x2, y2) {
+      var dx = x2 - x1, dy = y2 - y1;
+      var len = Math.sqrt(dx * dx + dy * dy);
+      if (len < 40) return 'M' + x1 + ',' + y1 + ' L' + x2 + ',' + y2;
+      var nx = -dy / len, ny = dx / len;
+      var segs = Math.max(2, Math.round(len / 30));
+      var jitter = Math.min(len * 0.015, 1.5);
+      var pts = [];
+      for (var i = 0; i <= segs; i++) {
+        var t = i / segs;
+        var px = x1 + dx * t;
+        var py = y1 + dy * t;
+        if (i > 0 && i < segs) {
+          px += nx * (Math.random() - 0.5) * 2 * jitter;
+          py += ny * (Math.random() - 0.5) * 2 * jitter;
+        }
+        pts.push([px, py]);
+      }
+      var d = 'M' + pts[0][0].toFixed(1) + ',' + pts[0][1].toFixed(1);
+      for (var i = 1; i < pts.length; i++) {
+        var prev = pts[i - 1];
+        var cur = pts[i];
+        var mx = (prev[0] + cur[0]) / 2;
+        var my = (prev[1] + cur[1]) / 2;
+        var wobble = jitter * 0.4;
+        var cx1 = prev[0] + (mx - prev[0]) * 0.5 + (Math.random() - 0.5) * wobble;
+        var cy1 = prev[1] + (my - prev[1]) * 0.5 + (Math.random() - 0.5) * wobble;
+        var cx2 = mx + (cur[0] - mx) * 0.5 + (Math.random() - 0.5) * wobble;
+        var cy2 = my + (cur[1] - my) * 0.5 + (Math.random() - 0.5) * wobble;
+        d += ' C' + cx1.toFixed(1) + ',' + cy1.toFixed(1)
+           + ' ' + cx2.toFixed(1) + ',' + cy2.toFixed(1)
+           + ' ' + cur[0].toFixed(1) + ',' + cur[1].toFixed(1);
+      }
+      return d;
+    }
+
+    function addPath(svg, x1, y1, x2, y2) {
+      var p1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p1.setAttribute('d', sketchLine(x1, y1, x2, y2));
+      svg.appendChild(p1);
+    }
+
+    window.addEventListener('load', function() {
+      setTimeout(drawTreeLines, 3100);
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(drawTreeLines, 200);
+    });
+  </script>
+
+</body>
+</html>

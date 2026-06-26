@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入选和分析逻辑 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body>
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1>入选和分析逻辑</h1>
+
+      <h2 id="why-assistant">为什么分析AI通用助手？</h2>
+
+      <p><strong>典型代表：</strong>ChatGPT的发布引爆了这一轮AI浪潮，ai通用助手是众多ai产品中最具代表性的品类</p>
+      <p><strong>核心战场：</strong>用户规模最大、竞争最激烈</p>
+      <p><strong>超级入口</strong>：集搜索、写作、编程、创作等于一体，正在成为下一代通用工具的入口</p>
+
+      <h2 id="why-four">为什么选择这四个产品？</h2>
+
+      <p><strong>ChatGPT：</strong>行业奠基产品，周活近9亿，无可争议的领军者</p>
+
+      <div class="comp-note">
+        <p>注：OpenAI 将通用助手能力分散于 ChatGPT 与 Codex 两个应用，ChatGPT 上有 Codex 的入口，且官方已宣布合并。本文以ChatGPT为主，但也标注Codex的独有能力作为补充。</p>
+      </div>
+
+      <p><strong>Claude：</strong>最强力的ChatGPT挑战者，企业端增速惊人，深受专业用户喜爱</p>
+      <p><strong>豆包：</strong>背靠字节跳动生态，中国下载量和月活双第一的AI对话产品</p>
+      <p><strong>Kimi：</strong>明星ai独角兽，坚持开源路线，实力强劲</p>
+
+      <h2 id="how-to-analyze">如何分析？</h2>
+
+      <figure class="comp-formula" id="formulaScene">
+        <div class="formula-row">
+          <span class="formula-node formula-result">AI 助手的能力</span>
+          <span class="formula-op">=</span>
+          <span class="formula-node formula-input">模型层</span>
+          <span class="formula-op">×</span>
+          <span class="formula-node formula-input formula-input--alt">应用层</span>
+        </div>
+      </figure>
+
+      <p><strong>分层分析：AI 助手的能力 = 模型层 × 应用层</strong><br>模型是智能的来源，应用层是智能的放大器——两者是乘法而非加法关系。同一个模型搭配不同的应用层，用户体验可以截然不同：Claude 的模型接入 MCP 和浏览器扩展后，能在用户的真实工作环境中完成任务；同一个模型如果只有一个对话框，就只能生成文本。反过来，应用层再完善，模型能力不足，也无法保障任务的完成质量。任何一层的短板都会拖垮整体——这就是乘法的含义。因此，本文将两层分开评估。</p>
+
+      <p style="margin-top:var(--space-12)"><strong>两个边界——信息边界和行动边界</strong><br>这个拆分直接来自模型的原生局限。大语言模型天然有两个边界：<strong>信息边界</strong>——模型只有参数化知识，没有长期记忆、用户私有信息和实时信息；<strong>行动边界</strong>——模型只能输出 token 序列，不具备真实的执行能力。应用层的核心价值之一，就是帮助模型突破这两个边界——从"只能对话"走向"能完成任务"。</p>
+
+      <section class="comp-appendix" id="notes">
+        <h2>分析说明</h2>
+
+        <div class="comp-appendix-item">
+          <p>1.本文所分析的产品与模型更新频繁，具体功能、数据乃至部分结论难免存在时效局限。但本文的核心价值在于分析框架与背后的分析、思考方式，而非对某一时刻产品状态的快照记录。</p>
+        </div>
+
+        <div class="comp-appendix-item">
+          <p>2.本分析以 app 的 mac 桌面端为主，辅助参考同期的 web 端，app 的桌面端具体版本和订阅方案如下：</p>
+          <details class="comp-collapse">
+            <summary>展开版本详情</summary>
+            <div class="comp-collapse-body">
+              <table class="comp-table comp-table--relaxed">
+                <thead>
+                  <tr>
+                    <th>产品</th>
+                    <th>版本</th>
+                    <th>订阅方案</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>ChatGPT</td><td>1.2026.119 (1780053722)</td><td>Plus $20/月</td></tr>
+                  <tr><td>Codex</td><td>26.602.71036</td><td>Plus $20/月</td></tr>
+                  <tr><td>Claude</td><td>1.11847.5 (9692f0)</td><td>Pro $20/月</td></tr>
+                  <tr><td>豆包</td><td>v2.13.8（2.13.8）</td><td>免费版（尚未正式推出付费版）</td></tr>
+                  <tr><td>Kimi</td><td>3.0.15 (3.0.15)</td><td>Allegretto ¥199/月</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <div class="comp-appendix-item">
+          <p>3.本分析以实测为主，测试时间窗口为2026年5月初至2026年6月8日，同时参考官方文档、权威第三方分析</p>
+        </div>
+
+        <div class="comp-appendix-item">
+          <p>4.本文可能存在以下局限性：</p>
+          <details class="comp-collapse">
+            <summary>展开详情</summary>
+            <div class="comp-collapse-body">
+              <ul>
+                <li>时效、app版本等局限性，此类app、模型更新极快，且app不同版本之间存在细微差距，本次实测以mac桌面端为主</li>
+                <li>此类app都为闭源软件，部分对于技术细节的推断可能存在局限性</li>
+                <li>benchmark和arena数据的最新快照时间在2026年6月5日左右，此类数据在不同时间点会有小幅度的波动</li>
+                <li>以及其他局限性</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="comp-appendix-item">
+          <p>5.Kimi Claw 不纳入分析：它是月之暗面对开源项目 OpenClaw 的托管，并非自研。其他厂商也有同类托管产品（如字节火山引擎的 ArkClaw），为保证选品标准一致，托管类产品一律不纳入。</p>
+        </div>
+
+        <div class="comp-appendix-item">
+          <p>6.Claude Code CLI、扣子/Trae 等独立产品均不纳入分析。</p>
+        </div>
+      </section>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="../index.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">首页</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="overview.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">产品概况</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

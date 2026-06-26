@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多模态生成 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body class="app-section">
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">多模态生成</h1>
+
+      <p><strong>AI app 生成图片、视频、音频等非文本内容的能力，该能力主要由模型来提供。</strong></p>
+
+      <h3 class="comp-sketch-label">多模态生成</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>生成图片</th>
+            <th>生成视频</th>
+            <th>生成音频</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>原生支持</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>不支持</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>原生支持</td>
+            <td>原生支持</td>
+            <td>原生支持（播客+音乐）</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>有限支持</td>
+            <td>有限支持</td>
+            <td>有限支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-note">
+        <p>注：Kimi在 agent 模式下可以调用工具生成图片、视频和音频，但其无自研多模态生成模型，生成能力来自外部模型。</p>
+      </div>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.豆包全有、Claude 全无，两个极端都是战略选择</strong><br>豆包全部都支持，每个模态都有内容生态承接；Claude 全部不支持，其面向生产力场景，视觉产出由沙箱代码生成（SVG、图表、网页）替代，走的是另一条路线。</p>
+        <p><strong>2.OpenAI 自研模型但缺生态出口</strong><br>OpenAI 自研 Sora 2 模型，但未接入 ChatGPT，独立应用关停后视频能力处于真空——反向印证字节生态出口的价值。</p>
+        <p><strong>3.Kimi 借外部模型补位</strong><br>Agent 模式调用外部模型获得多模态生成能力，但 app 内无独立生成入口——把生成限定为 Agent 任务的子能力。</p>
+      </div></div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="app-scheduled.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">定时任务</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="thoughts.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">思考</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

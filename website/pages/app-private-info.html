@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户私有信息 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body class="app-section">
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">用户私有信息</h1>
+
+      <p><strong>用户私有信息按四个维度展开:用户级设置、项目级上下文与流程性知识（skill）、本地数据以及云端应用。</strong></p>
+
+      <h3 id="user-settings" class="comp-sketch-label">用户级设置</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>全局自定义指令</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>不支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>选择回复风格</th>
+            <th>自定义回复风格</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>不可完全自定义，但提供细分选项</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td><span class="bench-tooltip-trigger">支持*<span class="bench-tooltip">即将迁移、合并进skill</span></span></td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.豆包和 Kimi 在用户偏好设置上缺席</strong><br>
+        全局指令和定制回复风格,技术上简单——只是把一段文本注入系统提示，但需求普遍;再看四款 app 的"设置"界面,豆包和 Kimi 尚显单薄。</p>
+      </div></div>
+
+      <h3 id="project-skill" class="comp-sketch-label">项目级上下文和流程性知识（skill）</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>"项目管理"功能</th>
+            <th>项目级指令</th>
+            <th>项目级文件库</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>不支持</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.「项目管理」和专业工作高度相关</strong><br>
+        项目级指令和文件库,本质是给特定任务一个常驻上下文,免去每次对话的重复输入和上传——这是专业知识工作者的高频刚需。豆包缺席可能有其大众定位的影响,而 Kimi 的用户画像偏专业知识工作者,此处的空白值得关注。</p>
+      </div></div>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Skill（可复用的<br>流程性知识）</th>
+            <th>提供官方商店</th>
+            <th>用户自行配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>不提供</td>
+            <td><span class="bench-tooltip-trigger">不支持*<span class="bench-tooltip">个人用户暂不支持，部分团队、企业计划支持</span></span></td>
+          </tr>
+          <tr class="row-supplementary">
+            <td>Codex</td>
+            <td>支持</td>
+            <td>提供</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>提供</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>支持</td>
+            <td>不提供</td>
+            <td><span class="bench-tooltip-trigger">存疑**<span class="bench-tooltip">豆包应用疑似在5月7日左右上线"任务模式"后【版本号：v2.9.7（7049.72）】，<br>开始支持skill。对于"是否支持用户自行配置"，据本人实测，可以在对话中成<br>功配置，但在之后的测试中，都未能成功触发，所以存疑。这也体现了豆包的<br>skill功能尚在早期阶段。</span></span></td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>提供</td>
+            <td>支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.skill 已被广泛采纳,各家快速跟进</strong><br>
+        skill 把一次性的提示词变成可复用、可组合、可分发的资产;而"官方商店"和"可自行配置"决定它的可用性以及能否形成生态。Anthropic 提出 skill 并做得最完整;Codex 因开发者定位天然契合,快速跟上;Kimi 跟进迅速,商店与自配齐全;ChatGPT 跟了半步——能力已进产品,但未开放成生态;豆包刚起步,尚不完善和稳定。</p>
+      </div></div>
+
+      <h3 id="local-file" class="comp-sketch-label">本地数据 → 本地文件</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>上传本地文件</th>
+            <th>直连本地文件夹</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr class="row-supplementary">
+            <td>Codex</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>支持( Work 模式)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="local-app" class="comp-sketch-label">本地数据 → 本地应用</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th> 接入本地<br>应用</th>
+            <th> 主要接入<br>方式</th>
+            <th>读取深度</th>
+            <th>提供官方<br>商店</th>
+            <th>用户自行<br>配置</th>
+            <th>覆盖<br>范围</th>
+            <th>开放<br>程度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>有限支持</td>
+            <td>UI 读取 + <br>扩展（少<br>部分）</td>
+            <td>浅（仅当前<br>界面文本）</td>
+            <td><span class="bench-tooltip-trigger">否（仅普<br>通清单*）<span class="bench-tooltip">在对话框主动询问获取的清单或电脑本地已经下载相应应用后，看到的一个简易的提示性清单。</span></span></td>
+            <td>不支持</td>
+            <td>低</td>
+            <td>低</td>
+          </tr>
+          <tr class="row-supplementary">
+            <td>Codex</td>
+            <td>支持</td>
+            <td>本地 MCP</td>
+            <td>深（结构化<br>数据）</td>
+            <td>否（仅有<br>插件清单）</td>
+            <td>支持</td>
+            <td>高</td>
+            <td>高</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>本地 MCP</td>
+            <td>深（结构化<br>数据）</td>
+            <td>是</td>
+            <td>支持</td>
+            <td>高</td>
+            <td>高</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>有限支持</td>
+            <td>UI 读取+ <br>扩展、脚本<br>（少部分）</td>
+            <td>浅（仅当前<br>界面文本）</td>
+            <td><span class="bench-tooltip-trigger">否（仅普<br>通清单*）<span class="bench-tooltip">在对话框主动询问获取的清单或电脑本地已经下载相应应用后，看到的一个简易的提示性清单。</span></span></td>
+            <td>不支持</td>
+            <td>低</td>
+            <td>低</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-note">
+        <p>附：ChatGPT以及豆包还提供"截取屏幕截图/共享屏幕"功能，通过截图来获取本地应用信息。</p>
+      </div>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.本地数据的获取分为两个层次：一次性上传，或持续读取的通道</strong><br>
+        上传是快照，静态数据并且依赖用户手动操作；直连和接入更像是一个通道，AI 可以主动、持续地读取。
+        Claude/Codex 两条全通且都走 MCP——深读取;Kimi 最近开始支持直连文件夹(Work 模式)，但尚未接入本地应用;ChatGPT/豆包相反,不能直连文件夹,应用主要通过 UI 浅读取。</p>
+        <p><strong>2.本地MCP相比UI读取，读取更深，覆盖面更广</strong><br>
+        UI 读取仅可拿到当前界面文本,局限于"查看";MCP 直连应用的数据接口,拿到结构化数据,可以"查询"。覆盖面上：UI 读取（以及扩展、脚本等）只能用于厂商逐个适配的少数应用；MCP 是开放协议,理论上任何应用都能接入,用户还可自行配置。</p>
+      </div></div>
+
+      <h3 id="cloud-app" class="comp-sketch-label">云端应用</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>接入云端应用</th>
+            <th>主要接入方式</th>
+            <th>提供官方商店</th>
+            <th>用户自行配置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>MCP</td>
+            <td>提供</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>MCP</td>
+            <td>提供</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>有限支持</td>
+            <td>浏览器插件（间接接入）</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-note">
+        <p>附：Kimi 目前仅支持通过浏览器插件 WebBridge，间接接入云端应用。</p>
+      </div>
+
+      <div class="comp-note">
+        <p>附：相比于其他三家，字节跳动具有生态接入的潜在优势，且可能已经在测试相关接入。</p>
+      </div>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.Claude 对本地应用和云端应用的支持最早、最全面</strong><br>
+        MCP 由 Anthropic 提出,一套协议同时覆盖本地与云端,Claude 自然做得最完整;ChatGPT 快速跟进,同样具备商店与自配;Kimi 暂时只能靠浏览器插件间接连接，有一定的局限性;豆包尚未支持——但字节系应用的生态资源,是其独有的潜在优势。</p>
+      </div></div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="app-memory.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">记忆系统</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="app-realtime.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">实时信息</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实时信息 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body class="app-section">
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1>实时信息</h1>
+
+      <h3 id="web-search" class="comp-sketch-label">联网搜索</h3>
+
+      <p>获取公开互联网上的网页内容。</p>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>联网搜索</th>
+            <th><span class="bench-tooltip-trigger">搜索后端*<span class="bench-tooltip">结果都来自有力推断，而非官方披露</span></span></th>
+            <th>搜索范围</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>Bing + 自建<br>（混合）</td>
+            <td>以公开的全球互联网为主</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>Brave（外包）</td>
+            <td>以公开的全球互联网为主</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>支持</td>
+            <td>自建</td>
+            <td>以公开的中国互联网为主，<br>有字节系内容（如抖音、头<br>条等）偏好</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>未知</td>
+            <td>以公开的中国互联网为主</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.搜索后端和范围的差异，会直接反映到模型的回复上</strong><br>
+        ChatGPT 和 Claude 服务全球市场，搜索范围以全球互联网为主，并且全球互联网的优质内容仍较多分布在开放的公开网页上；国内情况不同，中国互联网不等于全球互联网，搜索范围以中国互联网为主，而且有不少中文优质内容被锁在 App 私域（抖音、公众号、小红书等）中，"公开网页"对中文互联网的覆盖有限。后端和范围的选择，因此对回复质量有决定性作用。</p>
+      </div></div>
+
+      <h3 id="database" class="comp-sketch-label">权威数据库</h3>
+
+      <p>获取第三方权威数据库中的专业数据。</p>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>接入权威数据库</th>
+            <th>主要接入方式</th>
+            <th>需要数据商账号</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>MCP</td>
+            <td>通常需要</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>MCP</td>
+            <td>通常需要</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>平台内置</td>
+            <td>不需要</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.MCP 再次展现了它的价值，Kimi 则以内置权威数据库为特色</strong><br>
+        ChatGPT 和 Claude 通过 MCP 接入权威数据库——这个标准协议让模型获得了对接专业数据源的能力，覆盖面随生态扩展；但门槛是用户通常需自备数据商账号。Kimi 选择将同花顺、天眼查等权威数据库直接内置进平台，用户零门槛、开箱即用。</p>
+      </div></div>
+
+      <h3 id="browser-access" class="comp-sketch-label">浏览器级网页访问</h3>
+
+      <p><strong>联网搜索存在天然局限：</strong>默认只返回网页文本，图片丢失；无法读取 JS 动态渲染的页面；页面结构和需要交互才能展开的内容可能缺失；需要登录的页面无法访问；对爬虫封闭的私域内容（比如小红书），搜索后端同样抓取不到。权威数据库只在一个方向上有所弥补——它能提供结构化的专业数据，但覆盖面往往过窄。</p>
+
+      <p><strong>浏览器级网页访问补齐了这些短板。</strong>它能看图，能读取 JS 动态渲染的页面，能与网页交互，也能与用户协作；它以浏览器而非爬虫的身份访问网页，用户能看到的私域内容，它同样能看到——真正像人一样阅读网页。</p>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>浏览器级<br>网页访问</th>
+            <th>入口/产品</th>
+            <th>形态</th>
+            <th>评价</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-row-group="chatgpt">
+            <td rowspan="2">ChatGPT</td>
+            <td rowspan="2">支持</td>
+            <td>agent（代理）模式</td>
+            <td>云端虚拟浏览器</td>
+            <td>延迟高、不稳定、可用性差</td>
+          </tr>
+          <tr data-row-group="chatgpt">
+            <td class="cell-plain">Atlas</td>
+            <td>自研浏览器</td>
+            <td>可用性尚可、安全防护不足</td>
+          </tr>
+          <tr class="row-supplementary">
+            <td>Codex</td>
+            <td>支持</td>
+            <td>Codex Chrome <br>Extension</td>
+            <td>Chrome扩展</td>
+            <td>可用性较强、注重安全防护</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>Claude for Chrome</td>
+            <td>Chrome扩展</td>
+            <td>可用性强、注重安全防护</td>
+          </tr>
+          <tr>
+            <td><span class="bench-tooltip-trigger">豆包*<span class="bench-tooltip bench-tooltip--left">豆包也有沙箱虚拟机提供的虚拟浏览器，但一无明显入口，二无展示虚拟浏览器界面的窗口，能力非常有限，因此不算在内。</span></span></td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr data-row-group="kimi">
+            <td rowspan="2">Kimi</td>
+            <td rowspan="2">支持</td>
+            <td>agent（代理）模式</td>
+            <td>云端虚拟浏览器</td>
+            <td>延迟高、不稳定、可用性差</td>
+          </tr>
+          <tr data-row-group="kimi">
+            <td class="cell-plain">Kimi WebBridge</td>
+            <td>Chrome扩展</td>
+            <td>可用性强，不绑定 Kimi <br>生态（可被 Claude Code、<br>Cursor 等第三方agent驱动）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-note">
+        <p>注：豆包有豆包浏览器，但此浏览器仅支持侧边栏对当前页面提问、总结等，无类似自动的网页访问能力。</p>
+      </div>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.三种不同形态，但各家都在向 Chrome 扩展收敛</strong><br>
+        云端虚拟浏览器在一台陌生机器上运行裸浏览器，默认不继承用户的登录态，并且延迟高、可用性差；
+        Chrome 扩展寄生在用户日常使用的浏览器中，天然继承登录态与浏览习惯——用户能访问的页面它都能访问，可用性最强。
+        Claude 早在 2025 年 8 月就发布扩展，Kimi 与 OpenAI 直到 2026 年 4、5 月才相继跟进——四款产品中，Claude 最早走通这条路线；而 OpenAI 三条路线全部铺开，最终也开发扩展——且 Codex 扩展接入的是 Chrome，而非自家的 Atlas，侧面印证了这条路线的优势。
+        能力越强，风险越大：扩展意味着 AI 拿到用户的全部登录态，三家均把安全防护作为重点设计。</p>
+      </div></div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="app-private-info.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">用户私有信息</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="application.html#action-boundary">
+          <span class="page-nav-label">下一部分</span>
+          <span class="page-nav-title">行动边界</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+  <script>
+    document.querySelectorAll('tr[data-row-group]').forEach(function(row) {
+      var group = row.getAttribute('data-row-group');
+      var siblings = document.querySelectorAll('tr[data-row-group="' + group + '"]');
+      row.addEventListener('mouseenter', function() {
+        siblings.forEach(function(r) { r.classList.add('is-row-hover'); });
+      });
+      row.addEventListener('mouseleave', function() {
+        siblings.forEach(function(r) { r.classList.remove('is-row-hover'); });
+      });
+    });
+  </script>
+</body>
+</html>

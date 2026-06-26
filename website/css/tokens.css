@@ -1,0 +1,125 @@
+:root {
+  /* ===== 色彩系统 ===== */
+
+  /* 主色调 - 深沉专业，适合长文阅读 */
+  --color-bg:           #fafaf8;
+  --color-bg-secondary: #f2f1ed;
+  --color-bg-tertiary:  #e8e6e1;
+  --color-surface:      #ffffff;
+  --color-border:       #b5b1a9;
+  --color-border-light: #d4d1ca;
+
+  /* 文字 */
+  --color-text:         #1a1a18;
+  --color-text-secondary: #5c5c57;
+  --color-text-tertiary:  #8a8a84;
+  --color-text-inverse: #fafaf8;
+
+  /* 强调色 */
+  --color-accent:       #2d2d2a;
+  --color-accent-hover: #1a1a18;
+  --color-highlight:    #e8dfd0;
+
+  /* 四款产品品牌色 */
+  --color-openai:    #10a37f;
+  --color-anthropic: #d97706;
+  --color-bytedance: #3b82f6;
+  --color-moonshot:  #6366f1;
+
+  /* 语义色 */
+  --color-support:    #2a9d5c;
+  --color-no-support: #c4c4be;
+  --color-partial:    #d4a843;
+  --color-quote-border: #2d2d2a;
+  --color-quote-bg:    #f7f6f3;
+
+  /* ===== 字体系统 ===== */
+
+  --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC",
+                "SimSun", serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono",
+               "Cascadia Code", monospace;
+
+  /* 字号阶梯 */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-md:   1.0625rem; /* 17px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+  --text-4xl:  2.25rem;   /* 36px */
+  --text-5xl:  3rem;      /* 48px */
+
+  /* 字重 */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 900;
+
+  /* ===== 行高 ===== */
+  --leading-tight:  1.4;
+  --leading-normal: 1.8;   /* 中文正文 */
+  --leading-loose:  2.0;
+
+  /* ===== 间距系统（4px 基数） ===== */
+  --space-1:  0.25rem;   /* 4px */
+  --space-2:  0.5rem;    /* 8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+
+  /* ===== 布局 ===== */
+  --nav-width:     280px;
+  --content-max-width: 780px;
+  --page-padding:  var(--space-8);
+
+  /* ===== 圆角 ===== */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+
+  /* ===== 阴影 ===== */
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md:  0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 4px 16px rgba(0, 0, 0, 0.08);
+
+  /* ===== 过渡 ===== */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --duration-fast:   150ms;
+  --duration-normal: 300ms;
+  --duration-slow:   500ms;
+
+  /* ===== 动画 ===== */
+  --anim-stagger: 80ms;
+}
+
+/* 响应式断点下的覆盖 */
+@media (max-width: 1024px) {
+  :root {
+    --nav-width: 0px;
+    --page-padding: var(--space-6);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --page-padding: var(--space-4);
+    --text-5xl: 2.25rem;
+    --text-4xl: 1.875rem;
+    --text-3xl: 1.5rem;
+  }
+}

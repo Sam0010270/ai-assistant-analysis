@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>定时任务 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body class="app-section">
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">定时任务</h1>
+
+      <p><strong>定时任务在拓展"调用方式"</strong>——从「用户主动触发」到「自动执行」，执行过程中同样会涉及到信息边界和行动边界的突破。</p>
+
+      <h3 id="scheduled-tasks" class="comp-sketch-label">定时任务</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>设置定时任务</th>
+            <th>接入外部应用</th>
+            <th>依赖用户电脑持续运行</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>不依赖</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>Cowork的Scheduled依赖<br>Code的Routines可以不依赖</td>
+          </tr>
+          <tr>
+            <td><span class="bench-tooltip-trigger">豆包*<span class="bench-tooltip bench-tooltip--left">豆包的设置定时任务功能似乎在测试阶段、未正式发布，因为app无"定时任务"相关模块、也没有管理系统，但根据实测，确实可以设置定时任务并成功执行。</span></span></td>
+            <td>支持</td>
+            <td>不支持</td>
+            <td>不依赖</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>不支持直连特定应用，只支持使用浏览器扩展</td>
+            <td>依赖</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.能否接入外部应用，决定了定时任务的自动化深度</strong><br>
+        不接入外部应用，定时任务的产物止步于对话或沙箱，用户仍需手动搬运结果；接入外部应用后，定时任务才构成完整的自动化链路——比如读取邮件、生成摘要、更新日历，全程无需人工介入。ChatGPT 和 Claude 已具备这一能力；Kimi 部分具备，可借助浏览器扩展实现；豆包仍停留在前者。</p>
+        <p><strong>2.是否依赖用户电脑在线，决定自主执行的彻底程度，但这是一个权衡</strong><br>
+        ChatGPT、Claude Code Routines 可以脱离用户设备执行，用户离线不影响任务运行；Kimi、Claude Cowork Scheduled 要求用户设备持续在线，自主性受限。但本地执行也有其优势——只有运行在用户设备上，才能直接访问本地文件系统与本地应用——这是云端执行无法做到的。</p>
+      </div></div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="application.html#supplementary">
+          <span class="page-nav-label">上一部分</span>
+          <span class="page-nav-title">补充维度</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="multimodal.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">多模态生成</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

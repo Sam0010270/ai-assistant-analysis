@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>内部沙箱及其产物 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body class="app-section">
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">内部沙箱及其产物</h1>
+
+      <p><strong>内部沙箱是 app 为模型提供的、隔离的代码执行环境，通常是一台虚拟机。</strong>沙箱可以执行代码（装库、数据分析、科学计算）以及读写文件。从产物的角度来看，主要有两类——文件类和在云端浏览器中产生的影响。</p>
+
+      <h3 id="sandbox-network" class="comp-sketch-label">沙箱及其网络安全控制</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>沙箱</th>
+            <th>沙箱类型</th>
+            <th>联网安全控制</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-row-group="chatgpt">
+            <td rowspan="2">ChatGPT</td>
+            <td rowspan="2">有</td>
+            <td>普通沙箱</td>
+            <td>可联网，有受控白名单，用户不可改</td>
+          </tr>
+          <tr data-row-group="chatgpt">
+            <td class="cell-plain">agent 模式沙箱</td>
+            <td class="cell-plain">可联网，有受控白名单（其云端浏览器可以联网）</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>有</td>
+            <td>默认沙箱</td>
+            <td>安全保护强，用户三档可选可自定义</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>有</td>
+            <td>默认沙箱</td>
+            <td>联网最宽松，实测中未见白名单</td>
+          </tr>
+          <tr data-row-group="kimi">
+            <td rowspan="2">Kimi</td>
+            <td rowspan="2">有</td>
+            <td>普通沙箱</td>
+            <td>可联网，有受控白名单，用户不可改</td>
+          </tr>
+          <tr data-row-group="kimi">
+            <td class="cell-plain">agent 模式沙箱</td>
+            <td class="cell-plain">可联网，有受控白名单（其云端浏览器可以联网）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.沙箱是最早的行动环境，四家都已配备，但联网控制有差别</strong><br>
+        ChatGPT、Kimi 由平台决定白名单，用户无感知也无选择；Claude 把网络权限做成三档选项——用户可选可自定义，是四家中唯一的做法；豆包实测未见拦截，给定网址均可连接，出口管控最弱。沙箱联网是把双刃剑：开网才能装库、抓数据，但也可能遭到提示词攻击，出现用户数据泄漏。</p>
+      </div></div>
+
+      <h3 id="file-products" class="comp-sketch-label">文件类产物</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>word</th>
+            <th>ppt</th>
+            <th>excel</th>
+            <th>pdf</th>
+            <th><span class="bench-tooltip-trigger">数据图表*<span class="bench-tooltip">由沙箱代码（matplotlib/plotly 等）生成，区别于文生图。</span></span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.四家都已覆盖文件类产物，生成路径有区别</strong><br>
+        word/ppt/excel/pdf/数据图表，四家全支持，都已覆盖。差异在路径：ChatGPT、Claude、Kimi 走沙箱通用路径，内部沙箱中产所有格式。豆包沙箱同样具备通用生成能力，但 ppt、excel 也会路由至云端专用服务（ppt_agent、飞书表格 API）。质量上，基于有限实测的主观判断，Claude 与 Kimi 的文件产物最佳。</p>
+      </div></div>
+
+      <h3 id="cloud-browser" class="comp-sketch-label">云端浏览器</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>形态</th>
+            <th>在云端浏览器中，完成端到端任务</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>由agent模式提供</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>无云端浏览器</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td><span class="bench-tooltip-trigger">豆包*<span class="bench-tooltip bench-tooltip--left">据实测，豆包似乎有云端浏览器，但是既无明显入口，又不展示浏览器界面。</span></span></td>
+            <td>存疑</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>由agent模式提供</td>
+            <td>支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-note">
+        <p>附：端到端任务：用户只给目标，AI 完成从理解需求到交付结果的全部中间步骤。</p>
+      </div>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.云端浏览器是 agent 模式的一部分，可用性一般</strong><br>
+        ChatGPT、Kimi 的云端浏览器都由 agent 模式提供——沙箱虚拟机里跑一个浏览器，模型在其中点击、输入，任务影响直接落在网页里，产物从"交付文件"扩展到"改变外部状态"。但实测其延迟高、不稳定，可用性一般。Claude 没有云端浏览器，浏览器级操作全部押注本地 Chrome 扩展，可用性反而最强——这条路线的优势已被市场验证，OpenAI 与 Kimi 相继跟进扩展。</p>
+      </div></div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="application.html#action-boundary">
+          <span class="page-nav-label">上一部分</span>
+          <span class="page-nav-title">行动边界</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="app-external.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">外部系统及其产物</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+  <script>
+    document.querySelectorAll('tr[data-row-group]').forEach(function(row) {
+      var group = row.getAttribute('data-row-group');
+      var siblings = document.querySelectorAll('tr[data-row-group="' + group + '"]');
+      row.addEventListener('mouseenter', function() {
+        siblings.forEach(function(r) { r.classList.add('is-row-hover'); });
+      });
+      row.addEventListener('mouseleave', function() {
+        siblings.forEach(function(r) { r.classList.remove('is-row-hover'); });
+      });
+    });
+  </script>
+</body>
+</html>

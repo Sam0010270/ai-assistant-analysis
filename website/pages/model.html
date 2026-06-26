@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模型层 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body>
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 class="model-title">能力对比
+        <svg class="model-title-arrow" viewBox="0 0 56 28" aria-hidden="true">
+          <path d="M4 11 C14 10.5, 24 12, 34 11.5 C38 11, 42 11.5, 46 11.5 L46 16.5 C42 16.5, 38 17, 34 16.5 C24 16, 14 17.5, 4 17 Z" fill="#4A4846" filter="url(#sketch)"/>
+          <path d="M38 5 C42 9, 45 12.5, 48 14 C45 15.5, 42 19, 38 23" stroke="#4A4846" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#sketch)"/>
+        </svg>
+        模型层</h1>
+
+      <p><strong>本项目将 app 能力的来源拆解为模型层与应用层，本章聚焦模型层。</strong></p>
+
+      <h2 id="three-aspects">本章节从三方面分析模型能力</h2>
+
+      <p><strong>旗舰模型基本信息：</strong>各厂商当前旗舰模型的发布时间、上下文窗口、开源政策等基础参数。<br><strong>标准化测试集 benchmark ：</strong>固定的题目和标准化的评分，测量模型在特定维度（推理、代码、长文本等）的表现，分数多由厂商或第三方评测机构提供。<br><strong>权威第三方盲测平台 LM Arena ：</strong>测量真实用户对模型表现的偏好，评估开放任务下模型的整体能力。</p>
+
+      <h2 id="selection-principle">benchmark 和 LM Arena 榜单选取原则</h2>
+
+      <p><strong>用榜单评估模型层，需要尽力隔离 harness 的影响。</strong>模型层的评测分数必须尽量避免 harness（模型之外的执行框架：工具调用、任务状态维护等）影响，使模型的排名、分数差距来自于模型本身能力的差异。</p>
+
+      <p><strong>控制 harness 变量：harness 要么为零，要么为常量</strong></p>
+
+      <ul>
+        <li><strong>能在最小 harness 下测的，选最小 harness 版本：</strong>Benchmark 选 no tools 版本（GPQA Diamond、HLE、MMMU-Pro、MathVision），测参数化知识与原生推理；长文本类本身是纯输入输出。 Arena 选 Text / Vision / Document ，标准对话接口对能力评估透明；图像、视频生成类同理，无编排层。</li>
+        <li><strong>若 harness 无法为零，让 harness 成为常量：</strong>工具调用类选 MCPMark、Toolathlon ，所有模型跑同一套最小 scaffold ； Agent Arena 对所有模型使用相同 harness 与工具集。差异归因于模型本体。</li>
+        <li><strong>排除模型与 harness 捆绑、分差无法归因的榜单：</strong>Search Arena 测的是"模型 + 各家私有搜索系统"的整体，Code Arena 的分数随 harness 的不同而变化。</li>
+      </ul>
+
+      <h2 id="detail">具体分析</h2>
+
+      <p style="font-size: 15px; color: var(--color-text-secondary);">点击下方卡片进入对应章节</p>
+
+      <div class="model-nav-links">
+        <a class="model-nav-btn t1 r1" href="model-info.html">
+          <span class="model-nav-btn-title">旗舰模型基本信息</span>
+          <span class="model-nav-btn-arrow">→</span>
+        </a>
+        <a class="model-nav-btn t2 r2" href="model-benchmark.html">
+          <span class="model-nav-btn-title">旗舰模型 benchmark 数据</span>
+          <span class="model-nav-btn-arrow">→</span>
+        </a>
+        <a class="model-nav-btn t3 r3" href="model-arena.html">
+          <span class="model-nav-btn-title">LM Arena</span>
+          <span class="model-nav-btn-arrow">→</span>
+        </a>
+      </div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="overview.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">产品概况</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="model-info.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">旗舰模型基本信息</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>外部系统及其产物 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body class="app-section">
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">外部系统及其产物</h1>
+
+      <p><strong>沙箱之外，是用户真实的数字世界。</strong>上一节的沙箱由 AI 助手 app 提供，影响被隔离在内部。而外部系统（本地应用、云端应用、文件夹、浏览器、用户电脑）不属于 AI 助手 app 本身，写入即真实发生。</p>
+
+      <p><strong>按接入逻辑，外部系统分两类：</strong></p>
+      <ul>
+        <li><strong>接入特定应用</strong>：通过 MCP 等接口连接某一款应用;</li>
+        <li><strong>接入通用环境：</strong>借助文件系统、浏览器、用户电脑，一次覆盖一类场景。</li>
+      </ul>
+
+      <h3 id="local-app" class="comp-sketch-label">特定应用 → 本地应用</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>接入本地<br>应用</th>
+            <th>主要接入<br>方式</th>
+            <th>写入</th>
+            <th>在接入的本地应用中，<br>完成端到端任务</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>有限支持</td>
+            <td>UI 读取+ 扩展<br>（少部分）</td>
+            <td><span class="bench-tooltip-trigger">大多数不支持*<span class="bench-tooltip">极少部分应用提供有限的写入接口，比如VS Code</span></span></td>
+            <td><span class="bench-tooltip-trigger">大多数不支持*<span class="bench-tooltip">极少部分应用提供有限的写入接口，比如VS Code</span></span></td>
+          </tr>
+          <tr class="row-supplementary">
+            <td>Codex</td>
+            <td>支持</td>
+            <td>本地 MCP</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>本地 MCP</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>有限支持</td>
+            <td>UI 读取+ 扩展<br>（少部分）</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.Claude 和 Codex 领先，根源在于接入方式</strong><br>
+        Claude 与 Codex 通过本地 MCP接入：结构化接口，可读可写，能在应用内完成端到端任务。ChatGPT 与豆包尚未跟上，主要通过 macOS Accessibility API 接入：能力十分有限，基本只读不写，几乎未突破行动边界。Kimi 整体缺席。</p>
+      </div></div>
+
+      <h3 id="cloud-app" class="comp-sketch-label">特定应用 → 云端应用</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>接入云端应用</th>
+            <th>主要接入<br>方式</th>
+            <th>写入</th>
+            <th>在接入的本地应用中，<br>完成端到端任务</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>MCP</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>MCP</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td><span class="bench-tooltip-trigger">不支持*<span class="bench-tooltip">唯一例外，可通过插件WebBridge访问Chrome，但不等于通用的云端应用直接接入</span></span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.MCP 已成行业标准，国内厂商跟进云端应用接入有难度</strong><br>
+        ChatGPT、Claude 均以 MCP 接入云端应用，支持端到端任务；豆包缺席、Kimi 有WebBridge，但也不支持直接接入。
+        支持 MCP 在技术上并不难，国内厂商跟进除了需要时间以外，还必须考虑国内的现实情况：</p>
+        <p><strong>一、国外 MCP 生态无法直接、完全复用：</strong>受网络环境影响，国内的 Saas 生态和国外的有很大差别，因此不能直接、完全复用国外 MCP 生态；<br>
+        <strong>二、可接的优质 SaaS 少：</strong>国内 SaaS 渗透率远低于海外，缺少明星 SaaS 产品；高频应用又多归属大厂体系，数据即壁垒，开放意愿不高；国内软件生态整体也较海外更为封闭；<br>
+        <strong>三、数据存放位置难以接入：</strong>国内企业偏好本地部署与内网隔离——数据散落在本地文件与内网系统中；<br>
+        <strong>四、受产品定位影响：</strong>豆包最初定位偏向于娱乐，但如今有转向专业工作的趋势。</p>
+      </div></div>
+
+      <h3 id="folder" class="comp-sketch-label">通用环境 → 文件夹</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>以用户本地文件夹<br>为工作环境</th>
+            <th>接入方式</th>
+            <th>在本地文件夹中，完成<br>端到端任务</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr class="row-supplementary">
+            <td>Codex</td>
+            <td>支持</td>
+            <td>原生（运行方式自带）</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>本地MCP、Cowork模式</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>work模式</td>
+            <td>支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.门槛最低的通用环境，Kimi 近期跟进</strong><br>
+        文件夹接入无需协议、无需第三方配合，是成本最低的外部系统。Codex 原生支持，Claude 有双路径；Kimi 近期上线 work 模式快速跟进。ChatGPT、豆包缺席。</p>
+      </div></div>
+
+      <h3 id="browser" class="comp-sketch-label">通用环境 → 浏览器</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>入口/产品</th>
+            <th>在浏览器中，完成<br>端到端任务</th>
+            <th>主app端<br>发起</th>
+            <th>浏览器端<br>发起</th>
+            <th>可被第三方<br>agent驱动</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>Atlas</td>
+            <td>支持</td>
+            <td>不支持</td>
+            <td>支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr class="row-supplementary">
+            <td>Codex</td>
+            <td>Codex Chrome <br>Extension</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>不支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>Claude for Chrome</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td><span class="bench-tooltip-trigger">豆包*<span class="bench-tooltip bench-tooltip--left">豆包有自研浏览器，但此浏览器仅支持侧边栏对当前页面提问、总结等，没有类似的自动化能力。</span></span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>Kimi WebBridge</td>
+            <td>支持</td>
+            <td>支持</td>
+            <td>不支持</td>
+            <td>支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.接入一个浏览器，等于接入所有网页端应用</strong><br>
+        绝大多数应用都有网页版，且用户的登录态多在浏览器里——无需任何厂商开放接口，AI 以用户身份操作浏览器，就相当于直接操作应用。浏览器是目前覆盖范围与可靠性结合得最好的通用环境——范围仅次于整台电脑，但网页更容易被精准操控。</p>
+      </div></div>
+
+      <h3 id="computer" class="comp-sketch-label">通用环境 → 用户电脑</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>操控用户<br>电脑</th>
+            <th>功能名</th>
+            <th>机制</th>
+            <th>运行位置</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr class="row-supplementary" data-row-group="codex">
+            <td rowspan="2">Codex</td>
+            <td rowspan="2">支持</td>
+            <td>computer use</td>
+            <td>GUI + 程序化控制</td>
+            <td>后台/独立光标,可并行（macOS）</td>
+          </tr>
+          <tr class="row-supplementary" data-row-group="codex">
+            <td class="cell-plain">通过本地MCP接入<br>对应的MCP server</td>
+            <td class="cell-plain">-</td>
+            <td class="cell-plain">-</td>
+          </tr>
+          <tr data-row-group="claude">
+            <td rowspan="2">Claude</td>
+            <td rowspan="2">支持</td>
+            <td>computer use</td>
+            <td>GUI + 程序化控制</td>
+            <td>前台,接管主光标</td>
+          </tr>
+          <tr data-row-group="claude">
+            <td class="cell-plain">通过本地MCP接入<br>对应的MCP server</td>
+            <td class="cell-plain">-</td>
+            <td class="cell-plain">-</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>不支持</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote"><div>
+        <p><strong>1.覆盖面的顶点，难度最大，风险最高</strong><br>
+        四家中仅 Claude 与 Codex 入场，且在交互上不同：Claude 前台接管主光标，Codex 后台独立光标、可与用户并行操作——把"AI 干活时，用户能否继续用电脑"这个体验问题也解决了。另一方面，Claude 安全管控更严格，这可能制约其能力。</p>
+      </div></div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="app-sandbox.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">内部沙箱及其产物</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="application.html#supplementary">
+          <span class="page-nav-label">下一部分</span>
+          <span class="page-nav-title">补充维度</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+  <script>
+    document.querySelectorAll('tr[data-row-group]').forEach(function(row) {
+      var group = row.getAttribute('data-row-group');
+      var siblings = document.querySelectorAll('tr[data-row-group="' + group + '"]');
+      row.addEventListener('mouseenter', function() {
+        siblings.forEach(function(r) { r.classList.add('is-row-hover'); });
+      });
+      row.addEventListener('mouseleave', function() {
+        siblings.forEach(function(r) { r.classList.remove('is-row-hover'); });
+      });
+    });
+  </script>
+</body>
+</html>

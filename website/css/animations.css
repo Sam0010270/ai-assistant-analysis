@@ -1,0 +1,88 @@
+/* ===== 滚动触发：淡入 ===== */
+
+.anim-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.anim-fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 滚动触发：从左滑入 ===== */
+
+.anim-slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.anim-slide-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== 滚动触发：从右滑入 ===== */
+
+.anim-slide-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.anim-slide-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== 数据条增长动画 ===== */
+
+.anim-bar {
+  width: 0;
+  transition: width 800ms var(--ease-out);
+}
+
+.anim-bar.is-visible {
+  /* width 由 JS 或 inline style 设置目标值 */
+}
+
+/* ===== 数字递增动画（配合 JS） ===== */
+
+.anim-counter {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ===== 交错延迟 ===== */
+
+.anim-stagger > *:nth-child(1)  { transition-delay: calc(var(--anim-stagger) * 0); }
+.anim-stagger > *:nth-child(2)  { transition-delay: calc(var(--anim-stagger) * 1); }
+.anim-stagger > *:nth-child(3)  { transition-delay: calc(var(--anim-stagger) * 2); }
+.anim-stagger > *:nth-child(4)  { transition-delay: calc(var(--anim-stagger) * 3); }
+.anim-stagger > *:nth-child(5)  { transition-delay: calc(var(--anim-stagger) * 4); }
+.anim-stagger > *:nth-child(6)  { transition-delay: calc(var(--anim-stagger) * 5); }
+.anim-stagger > *:nth-child(7)  { transition-delay: calc(var(--anim-stagger) * 6); }
+.anim-stagger > *:nth-child(8)  { transition-delay: calc(var(--anim-stagger) * 7); }
+.anim-stagger > *:nth-child(9)  { transition-delay: calc(var(--anim-stagger) * 8); }
+.anim-stagger > *:nth-child(10) { transition-delay: calc(var(--anim-stagger) * 9); }
+
+/* ===== 尊重用户偏好 ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-in,
+  .anim-slide-left,
+  .anim-slide-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .anim-bar {
+    transition: none;
+  }
+}

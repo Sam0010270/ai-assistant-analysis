@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LM Arena — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body>
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">LM Arena</h1>
+
+      <p><strong>Benchmark 的三个固有缺陷：</strong>静态题库会被污染（测试题被当作训练数据，分数虚高）；测的是"应试能力"而非日常表现；厂商可以针对性刷分。</p>
+      <p>因此，引入 <strong>LM Arena</strong> ——盲测 + 真实用户提问。无固定题库、难以针对性优化、直接反映人类偏好，是目前规模最大的人类偏好评测，也是业界评价模型的重要参照。但偏好不完全等于能力，Benchmark 和 LM Arena 形成互补关系。</p>
+
+      <!-- ==================== Agent ==================== -->
+      <h2 id="agent">Agent</h2>
+
+      <h3 class="comp-sketch-label">Agent Arena</h3>
+      <p>对 AI 模型编排工具完成现实智能体任务的能力进行综合排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：9 ｜ 上榜模型数：21</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Anthropic</td>
+              <td>Opus 4.7</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>OpenAI</td>
+              <td>GPT 5.5</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>月之暗面</td>
+              <td>K2.6</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>字节跳动</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ==================== Chat ==================== -->
+      <h2 id="chat">Chat</h2>
+
+      <h3 class="comp-sketch-label">Text Arena — Overall</h3>
+      <p>对多家 AI 模型在数学、编程、创意写作等开放性文本任务上的综合表现进行排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：54 ｜ 上榜模型数：365</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Anthropic</td>
+              <td>Opus 4.6</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>OpenAI</td>
+              <td>GPT 5.5</td>
+              <td>9</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>月之暗面</td>
+              <td>K2.6</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>字节跳动</td>
+              <td>Seed 2.0 Pro</td>
+              <td>37</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="comp-sketch-label">Vision Arena — Overall</h3>
+      <p>对具备视觉理解能力的多模态 AI 模型进行综合排名，评测其对图像输入的推理能力。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：24 ｜ 上榜模型数：130</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Anthropic</td>
+              <td>Opus 4.7</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>OpenAI</td>
+              <td>GPT 5.5</td>
+              <td>8</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>月之暗面</td>
+              <td>K2.6</td>
+              <td>19</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>字节跳动</td>
+              <td>Seed 2.0 Pro</td>
+              <td>21</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="comp-sketch-label">Document Arena — Overall</h3>
+      <p>对 AI 模型在文档分析与长文本推理任务上的综合表现进行排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：8 ｜ 上榜模型数：28</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Anthropic</td>
+              <td>Opus 4.6</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>OpenAI</td>
+              <td>GPT 5.5</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>月之暗面</td>
+              <td>K2.6</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>字节跳动</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ==================== Image ==================== -->
+      <h2 id="image">Image</h2>
+
+      <h3 class="comp-sketch-label">Text-to-Image Arena — Overall</h3>
+      <p>对文生图 AI 模型的整体生成质量进行综合排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：20 ｜ 上榜模型数：70</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>OpenAI</td>
+              <td>GPT image 2</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>字节跳动</td>
+              <td>Seedream 4.5</td>
+              <td>18</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>Anthropic</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>月之暗面</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="comp-sketch-label">Image Edit Arena — Single-Image Edit</h3>
+      <p>对图像编辑 AI 模型在单张图片编辑任务上的综合表现进行排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：13 ｜ 上榜模型数：49</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>OpenAI</td>
+              <td>GPT Image 2</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>字节跳动</td>
+              <td>Seedream 4.5</td>
+              <td>15</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>Anthropic</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>月之暗面</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ==================== Video ==================== -->
+      <h2 id="video">Video</h2>
+
+      <h3 class="comp-sketch-label">Text-to-Video Arena — Overall</h3>
+      <p>对文生视频 AI 模型的整体生成质量进行综合排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：17 ｜ 上榜模型数：40</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>字节跳动</td>
+              <td>Seedance 2.0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>OpenAI</td>
+              <td>sora 2</td>
+              <td>5</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>Anthropic</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>月之暗面</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="comp-sketch-label">Image-to-Video Arena — Overall</h3>
+      <p>对图生视频 AI 模型的整体生成质量进行综合排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：15 ｜ 上榜模型数：40</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>字节跳动</td>
+              <td>Seedance 2.0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>OpenAI</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>Anthropic</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>月之暗面</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="comp-sketch-label">Video Edit Arena — Overall</h3>
+      <p>对视频编辑 AI 模型的整体表现进行综合排名。</p>
+      <p style="font-size: 15px; color: var(--color-text-secondary);">上榜厂商数：5 ｜ 上榜模型数：6</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table comp-table--plain-first">
+          <thead>
+            <tr>
+              <th>厂商排名</th>
+              <th>厂商</th>
+              <th>旗舰模型</th>
+              <th>旗舰模型排名</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>字节跳动</td>
+              <td>Seedance 2.0</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>OpenAI</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>Anthropic</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>—</td>
+              <td>月之暗面</td>
+              <td>未收录</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ==================== 结论 ==================== -->
+      <hr class="bench-divider"style="margin-top: 160px;">
+
+      <div class="comp-quote">
+        <div>
+          <p><strong>1. Anthropic 的模型最为出众</strong><br>在所有收录其模型的榜单（Agent / Text / Vision / Document）中，厂商排名和模型排名均为第一。</p>
+          <p><strong>2. OpenAI 同处第一梯队，图像生成优势突出</strong><br>语言模型类榜单全部收录，厂商排名均在前四（Agent / Document 第 2，Text / Vision 第 4），仅次于 Anthropic；图像生成则双榜第一。</p>
+          <p><strong>3. 月之暗面稳居第二梯队</strong><br>语言模型类四榜全部收录，厂商排名稳定在 3-10，是国内两家中第三方评测存在感更强的一家。</p>
+          <p><strong>4. 字节统治视频生成，但语言模型存在感最弱</strong><br>文生视频、图生视频、视频编辑三榜厂商排名均第一；而 Agent、Document Arena 均未收录其模型，与视频侧的强势形成鲜明反差。</p>
+          <p><strong>5. Arena 与 benchmark 互为校验，梯队结论成立</strong><br>LM Arena 得出的梯队结构（Anthropic / OpenAI 第一梯队、月之暗面第二、字节稍靠后）与 benchmark 结论一致。</p>
+        </div>
+      </div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="model-benchmark.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">旗舰模型 benchmark 数据</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="application.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">应用层</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

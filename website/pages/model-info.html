@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旗舰模型基本信息 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body>
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1>旗舰模型基本信息</h1>
+
+      <h2 id="language-model">多模态语言模型</h2>
+
+      <h3 id="latest-flagship" class="comp-sketch-label">旗舰语言生成模型</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>OpenAI</th>
+            <th>Anthropic</th>
+            <th>字节跳动</th>
+            <th>月之暗面</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>旗舰模型</td>
+            <td>GPT 5.5</td>
+            <td>Opus 4.8</td>
+            <td>Seed 2.0 Pro</td>
+            <td>K2.6</td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td>2026-04-23</td>
+            <td>2026-05-28</td>
+            <td>2026-02-14</td>
+            <td>2026-04-22</td>
+          </tr>
+          <tr>
+            <td>上下文窗口</td>
+            <td>1.05M tokens</td>
+            <td>1M tokens</td>
+            <td>256K tokens</td>
+            <td>256K tokens</td>
+          </tr>
+          <tr>
+            <td>知识截止日期</td>
+            <td>2025-12</td>
+            <td>2026-01</td>
+            <td>2025-05</td>
+            <td>2025-04</td>
+          </tr>
+          <tr>
+            <td>多模态输入</td>
+            <td>文本、图像</td>
+            <td>文本、图像</td>
+            <td>文本、图像、视频</td>
+            <td>文本、图像、视频</td>
+          </tr>
+          <tr>
+            <td>是否开源</td>
+            <td>否</td>
+            <td>否</td>
+            <td>否</td>
+            <td>是</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-quote">
+        <div>
+          <p><strong>1. 美国两家模型从知识截止到发布的间隔更短</strong>：美国两家模型从知识截止到正式发布约 4-5 个月，国内两家约 9-12 个月。</p>
+          <p><strong>2.上下文窗口美国领先，模态覆盖国内更广：</strong>GPT 5.5、Opus 4.8 的上下文窗口是 Seed 2.0 Pro、K2.6 的近 4 倍，但后两者支持视频输入。</p>
+          <p><strong>3.月之暗面是四家中唯一开源的厂商</strong></p>
+        </div>
+      </div>
+
+      <h2 id="generation-model">多模态生成模型</h2>
+
+      <h3 id="image-generation" class="comp-sketch-label">旗舰图像生成模型</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>OpenAI</th>
+            <th>Anthropic</th>
+            <th>字节跳动</th>
+            <th>月之暗面</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>旗舰模型</td>
+            <td>GPT Image 2</td>
+            <td>无</td>
+            <td>Seedream 5.0 Lite</td>
+            <td>无</td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td>2026-04-21</td>
+            <td>—</td>
+            <td>2026-02-13</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>输入模态</td>
+            <td>文本、图像</td>
+            <td>—</td>
+            <td>文本、图像</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>输出分辨率</td>
+            <td>原生最高 2K；API 测试版<br>最高 4K</td>
+            <td>—</td>
+            <td>最高4K</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>图像编辑能力</td>
+            <td>局部重绘、多轮对话式编辑、<br>背景替换、风格迁移等</td>
+            <td>—</td>
+            <td>局部重绘、多轮对话式编辑、<br>背景替换、风格迁移等</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="video-generation" class="comp-sketch-label">旗舰视频生成模型</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>OpenAI</th>
+            <th>Anthropic</th>
+            <th>字节跳动</th>
+            <th>月之暗面</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>旗舰模型</td>
+            <td>Sora 2</td>
+            <td>无</td>
+            <td>Seedance 2.0</td>
+            <td>无</td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td>2025-09-30</td>
+            <td>—</td>
+            <td>2026-02-12</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>输入模态</td>
+            <td>文本、图像、视频</td>
+            <td>—</td>
+            <td>文本、图像、视频、音频</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>最大分辨率</td>
+            <td>720p、1080p</td>
+            <td>—</td>
+            <td>2K</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>最长时长</td>
+            <td>15 秒、25 秒（Pro 用户）</td>
+            <td>—</td>
+            <td>15 秒</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-note">
+        <p><strong>注</strong>：Sora 应用已于 2026 年 4 月 26 日关闭。</p>
+      </div>
+
+      <div class="comp-quote">
+        <div>
+          <p><strong>1. Anthropic 和月之暗面只做语言模型</strong>：两家都是独立 AI 公司，没有内容生态承接多模态生成模型，不做是合理取舍。</p>
+          <p><strong>2. OpenAI 和字节都走"全模态自研"路线，但出口不同：</strong>字节有抖音、剪映等承接，生成模型有明确的分发生态；OpenAI 缺乏承接生态，自建内容平台 Sora 失败，今年 4 月关停。</p>
+        </div>
+      </div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="model.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">模型层</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="model-benchmark.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">旗舰模型 benchmark 数据</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>记忆系统 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body class="app-section">
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1>记忆系统</h1>
+
+      <h3 id="acquisition" class="comp-sketch-label">获取记忆的方式</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>AI 主动提取</th>
+            <th>用户指定</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td><span class="bench-tooltip-trigger">存疑*<span class="bench-tooltip">官方文档的描述偏向于支持，但根据我自己实测，主动提取的能力有限。</span></span></td>
+            <td>支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="level" class="comp-sketch-label">记忆层级与调用方式</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>全局记忆</th>
+            <th>项目记忆（针对某个项目生成记忆）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>支持</td>
+            <td>不支持（无"项目管理"相关功能）</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>不支持（无"项目管理"相关功能）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>自动参考</th>
+            <th>跨对话搜索原始聊天记录</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>支持</td>
+            <td>支持</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>支持</td>
+            <td>不支持</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>支持</td>
+            <td>不支持</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="transparency" class="comp-sketch-label">透明度与可控性</h3>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>是否可见（透明度）</th>
+            <th>能否修改（可控性）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChatGPT</td>
+            <td>是</td>
+            <td>能</td>
+          </tr>
+          <tr>
+            <td>Claude</td>
+            <td>是</td>
+            <td>能</td>
+          </tr>
+          <tr>
+            <td>豆包</td>
+            <td>是</td>
+            <td>能</td>
+          </tr>
+          <tr>
+            <td>Kimi</td>
+            <td>是</td>
+            <td>能</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comp-note">
+        <p>附：ChatGPT 支持从其浏览器产品 Atlas 中生成记忆，将记忆来源从"对话"延伸到"浏览行为"。</p>
+      </div>
+
+      <hr class="bench-divider"style="margin-top: 90px;">
+
+      <div class="comp-quote"><div>
+        <p><strong>1.基础记忆已是四家标配，差异在记忆层级和细化功能上</strong><br>
+        提取、可见、可修改这些基础功能四家都已经基本配备，真正的分化在于：ChatGPT 和 Claude 支持项目级记忆和跨对话搜索原始记录，豆包和 Kimi 的记忆只有全局一层，也无法搜索其他对话的原文。</p>
+      </div></div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="application.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">应用层</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="app-private-info.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">用户私有信息</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

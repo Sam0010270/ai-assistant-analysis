@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>思考 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+
+  <style>
+    /* ===== h2 手绘风标签（比 h3 的 comp-sketch-label 更大更深） ===== */
+    .thoughts-h2 {
+      display: inline-block;
+      position: relative;
+      isolation: isolate;
+      padding: 14px 32px;
+      font-family: var(--font-sans);
+      font-size: 22px;
+      font-weight: var(--weight-bold);
+      color: #FFFFFF;
+      margin-top: var(--space-20);
+      margin-bottom: var(--space-6);
+      transform: rotate(-0.5deg);
+      transition: transform 0.3s var(--ease-out);
+    }
+    .thoughts-h2::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1C1C1A;
+      border: 2.8px solid rgba(0,0,0,0.08);
+      border-radius: 16px 10px 18px 8px;
+      filter: url(#sketch);
+      z-index: -1;
+    }
+    h1 + .thoughts-h2 { margin-top: var(--space-10); }
+
+    /* ===== A. 三梯队阶梯图 ===== */
+    .tier-figure {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: var(--space-5);
+      padding: var(--space-8) var(--space-6) var(--space-10);
+      position: relative;
+    }
+    .tier-col { flex: 1; max-width: 160px; }
+    .tier-col--1 { margin-top: 0; }
+    .tier-col--1half { margin-top: 75px; }
+    .tier-col--2 { margin-top: 90px; }
+    .tier-col--3 { margin-top: 120px; }
+    .tier-card {
+      position: relative;
+      isolation: isolate;
+      width: 100%;
+      box-sizing: border-box;
+      height: 120px;
+      padding: var(--space-4) var(--space-3);
+      color: #FFFFFF;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-3);
+    }
+    .tier-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #2d2d2a;
+      border: 2.8px solid rgba(0,0,0,0.08);
+      filter: url(#sketch);
+      z-index: -1;
+    }
+    .tier-col--1 .tier-card { border-radius: 16px 10px 18px 8px; transform: rotate(-0.6deg); }
+    .tier-col--1half .tier-card { border-radius: 8px 14px 10px 16px; transform: rotate(0.4deg); }
+    .tier-col--2 .tier-card { border-radius: 10px 18px 8px 16px; transform: rotate(0.5deg); }
+    .tier-col--3 .tier-card { border-radius: 14px 8px 16px 10px; transform: rotate(-0.4deg); }
+    .tier-col--1 .tier-card::after { border-radius: 16px 10px 18px 8px; }
+    .tier-col--1half .tier-card::after { border-radius: 8px 14px 10px 16px; }
+    .tier-col--2 .tier-card::after { border-radius: 10px 18px 8px 16px; }
+    .tier-col--3 .tier-card::after { border-radius: 14px 8px 16px 10px; }
+    .tier-names {
+      font-family: var(--font-sans);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-bold);
+      line-height: 1.4;
+    }
+    .tier-desc {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-normal);
+      line-height: 1.5;
+      opacity: 0.92;
+    }
+
+    /* ===== B. 周活对比横向条形图 ===== */
+    .wau-figure { padding: var(--space-8) var(--space-4); }
+    .wau-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+    .wau-name {
+      width: 92px;
+      flex-shrink: 0;
+      text-align: right;
+      font-family: var(--font-sans);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-bold);
+      color: var(--color-text);
+    }
+    .wau-bar {
+      position: relative;
+      isolation: isolate;
+      height: 38px;
+      display: flex;
+      align-items: center;
+    }
+    .wau-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px 5px 7px 4px;
+      filter: url(#sketch);
+      z-index: -1;
+    }
+    .wau-bar--chatgpt { width: 600px; }
+    .wau-bar--chatgpt::after { background: #2d2d2a; }
+    .wau-bar--codex { width: 16px; }
+    .wau-bar--codex::after { background: #807A72; }
+    .wau-value {
+      position: absolute;
+      left: calc(100% + 12px);
+      white-space: nowrap;
+      font-family: var(--font-sans);
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .wau-gap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      margin: var(--space-8) 0 var(--space-8) 340px;
+    }
+    .wau-arrow { flex-shrink: 0; transform: rotate(30deg); }
+    .wau-multiple {
+      font-family: var(--font-sans);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+    .wau-note {
+      margin-top: var(--space-5);
+      padding-left: var(--space-4);
+      border-left: 2px solid var(--color-border);
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ===== 脚注列表 ===== */
+    .footnotes {
+      margin-top: var(--space-20);
+      padding-top: 0;
+      border-top: 1px solid var(--color-border-light);
+    }
+    .footnotes h2 {
+      font-family: var(--font-serif);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-bold);
+      color: var(--color-text);
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+    .footnotes ol {
+      list-style: none;
+      counter-reset: fn;
+      padding-left: 0;
+      margin: 0;
+    }
+    .footnotes li {
+      counter-increment: fn;
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--space-2);
+      padding-left: 2em;
+      text-indent: -2em;
+    }
+    .footnotes li::before {
+      content: "[" counter(fn) "] ";
+      font-weight: var(--weight-semibold);
+      color: var(--color-text);
+    }
+  </style>
+</head>
+<body>
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">思考</h1>
+
+      <!-- ==================== 整体判断 ==================== -->
+      <h2 id="overall" class="thoughts-h2">整体判断</h2>
+
+      <p><strong>1.模型层与应用层都很重要，能力 = 模型层 × 应用层</strong><br>
+      本项目的分析框架将 AI 助手的能力拆为模型层 × 应用层，分开评估。模型层和应用层都很重要，并且两层是乘法关系，任何一层的短板都会成为整体能力的瓶颈。</p>
+
+      <p>模型层仍然是硬实力。LM Arena 的数据显示，Anthropic 与 OpenAI 在语言模型类榜单上稳居第一梯队，与月之暗面、字节跳动拉开明显差距；benchmark 上虽然 K2.6 在部分榜单逼近闭源旗舰，但在 HLE 等高难度测试中差距依然显著。模型层的梯队分化并未消失，它仍然是产品体验的底层决定因素。</p>
+
+      <p>应用层同样不可忽视。同一个模型搭配不同的应用层，用户体验可以截然不同——本文的应用层分析已经表明，四家产品在信息边界和行动边界上的差异显著。MCP 生态、浏览器接入、computer use、记忆层级、多模态生成等维度上的分化，正在成为产品间体感差异的重要来源。</p>
+
+      <br> 
+      <br>
+      <br>
+
+      <p><strong>2.应用层能力有明显分化</strong><br>
+      在应用层突破信息边界与行动边界方面，四家产品呈现出明显的差异。</p>
+
+      <p><strong>Claude 与 Codex 已完成从 0 到 1。</strong>两者在信息边界（比如：记忆系统、实时搜索、用户私有数据的接入）和行动边界（比如：MCP 生态、浏览器扩展、computer use）的各个维度上都已经有了解决方案。它们之间的竞争已不在功能的有无，而在功能的质量上。另一方面，ChatGPT在对应的功能上有不少的缺席，这或许也是ChatGPT要和Codex合并的重要原因。</p>
+
+      <p><strong>Kimi 正在快速补齐。</strong>WebBridge、work 模式 等在短时间内密集上线，两个边界的多个维度正被逐一覆盖。但在直连用户应用、记忆系统以及 computer use 等上仍有明显缺口，尚未完全跨过从 0 到 1 的门槛。</p>
+
+      <p><strong>豆包最初的重心可能不在这个方向，如今处于转型中。</strong>在应用层突破两个边界的维度上，豆包的缺位最为明显——外部系统的接入能力薄弱、没有浏览器扩展、没有 computer use。它最初的投入重心可能放在多模态生成上，背靠字节的内容生态，有清晰的承接出口。不过，从最近关于即将推出订阅计划的官方声明来看，豆包向生产力工具转型的意图已经非常明确。</p>
+
+      <!-- 可视化 A：三梯队阶梯图 -->
+      <figure class="tier-figure">
+        <div class="tier-col tier-col--1">
+          <div class="tier-card">
+            <span class="tier-names">Claude<br>Codex</span>
+            <span class="tier-desc">已完成从 0 到 1<br>竞争已在功能质量</span>
+          </div>
+        </div>
+        <div class="tier-col tier-col--1half">
+          <div class="tier-card">
+            <span class="tier-names">ChatGPT</span>
+            <span class="tier-desc">多项应用层能力空缺<br>即将与 Codex 合并</span>
+          </div>
+        </div>
+        <div class="tier-col tier-col--2">
+          <div class="tier-card">
+            <span class="tier-names">Kimi</span>
+            <span class="tier-desc">正在快速补齐</span>
+          </div>
+        </div>
+        <div class="tier-col tier-col--3">
+          <div class="tier-card">
+            <span class="tier-names">豆包</span>
+            <span class="tier-desc">转型中</span>
+          </div>
+        </div>
+      </figure>
+      <p style="text-align:center; font-size:var(--text-sm); color:var(--color-text-secondary); margin-top:0;">当前应用层能力的分化格局</p>
+
+      <br>
+      <br>
+      <br>
+
+      <p><strong>3.Agentic AI 已成行业共识，专业工作是最清晰的落地方向</strong><br>
+      <strong>从对话走向 agent，已不再是某一家的判断，而是整个行业的共识。</strong>Claude 率先走通了这条路：Anthropic 80%的收入来自企业客户[1]，Claude Code 单品 ARR 超$2.5B[2]——专业用户愿意为能真正完成任务的 AI 付费，商业模式已经验证。本文分析的其他三家产品也不约而同走向同一方向——Codex 拓展定位后与 ChatGPT 合并、Kimi work 模式、豆包要发布专业版。</p>
+
+      <p><strong>突破信息和行动边界对 agentic 能力至关重要。</strong>Agent 的核心在于：能自主获取信息（信息边界）+ 能自主执行动作（行动边界）。不突破这两个边界，模型再强也只能被困在对话框内。</p>
+
+      <br> 
+      <br>
+      <br>  
+
+      <p><strong>4.从代码到专业工作—— agentic AI 的趋势</strong><br>
+      编码是 AI 对专业工作冲击最大的领域。代码天然适合 AI：大量优质的训练数据，输入输出都是文本，有明确的验证信号（测试通过/编译成功），开发者又是离 AI 最近的用户群体——coding agent 因此成为 agentic AI 最先跑通的方向。</p>
+
+      <p>但 AI agent 的价值不止于编写代码。让模型写代码的那些底层能力——规划步骤、操作文件、调用工具、自主纠错——和完成其他专业工作所需的能力是相似的。
+        并且：专业知识工作日常事务的很大一部分本身就在电脑上完成——检索案例、起草合同、搭建财务模型、处理数据表格、制作汇报材料。底层能力相通，工作介质又相同。
+        当 AI agent 的能力逐渐成熟以后，自然向更广的知识工作方向演变。产品演进路径已经验证了这一判断：Claude Code → Cowork，Codex官方定位的拓展，Kimi → work 模式——三家走了相同的路，从服务开发者到服务所有专业工作者。</p>
+
+      <br> 
+      <br>
+      <br>      
+
+      <p><strong>5.完成端到端的任务极具价值——它是迈向更深层次自动化的关键一步</strong><br>
+      用户只给目标，AI 完成从理解需求到交付结果的全部中间步骤——这就是端到端任务。端到端的任务要求模型具有足够的能力，可以长时间思考、规划步骤、自主纠错等。另一方面，端到端的任务要求应用层能突破信息边界，让模型可以获取到所有必要的相关信息，再突破行动边界将结果写入真实世界。</p>
+
+      <!-- ==================== Claude ==================== -->
+      <h2 id="claude" class="thoughts-h2">Claude</h2>
+
+      <p><strong>1.观察：Claude 的崛起</strong></p>
+
+      <ul>
+        <li><strong>全球估值最高的 AI 公司：</strong>2026年5月，Anthropic 以 $965B 估值完成最新一轮融资[3]，超越 OpenAI 的 $852B[4]。</li>
+        <li><strong>年化营收运行率（ARR）不到两年翻三四十倍：</strong>从2024年底的约 $1B 增长至2026年4月的 $30B，5月进一步突破 $47B[5]。注：ARR 以当月收入×12推算，非经审计年营收。</li>
+        <li><strong>顶级企业的选择：</strong>Fortune 10 中 8 家已是 Claude 客户[2]。</li>
+      </ul>
+
+      <p>两年前还被视为 OpenAI 追赶者的 Anthropic，如今已与 OpenAI 并肩甚至反超。</p>
+
+      <br> 
+      <br>
+      <br>  
+
+      <p><strong>2. Claude 崛起的原因</strong></p>
+
+      <p><strong>2.1 能力领先：模型层与应用层的双重领先——从本项目出发分析</strong><br>
+      <strong>在模型层，Claude 的旗舰模型甚至可以被认为是第一名。</strong>在所有收录 Anthropic 模型的 LM Arena 榜单中，Anthropic 在每一个榜单的厂商排名和其旗舰模型在每一个榜单的模型排名都是第一名；benchmark 上，Claude 旗舰模型在各项测试中稳定在前几位。</p>
+
+      <p><strong>在应用层，本文分析的信息边界与行动边界的各个维度上，Claude 都已有解决方案，且多项关键功能是由 Anthropic 率先推出的</strong>——computer use，通过 MCP 接入应用，Claude in Chrome 浏览器扩展。</p>
+
+      <p><strong>2.2 清晰的定位，被市场验证的路线选择，成功的商业模式</strong><br>
+      <strong>清晰的定位——专注于服务专业知识工作者。</strong>Claude 没有研发任何的多模态生成模型，应用层中也没有任何的多模态生成功能。这不是能力的缺失，而是战略取舍。</p>
+
+      <p><strong>被市场验证的路线选择——实现路径、应用场景、产品架构，引领趋势</strong><br>
+      <strong>a.实现路径：</strong>接入外部应用，Claude 选择 MCP 这一开放协议，而非像 ChatGPT 一样，依赖 macOS Accessibility API 等特定手段构建 Work with Apps 功能；在浏览器接入上，Claude 选择 Chrome 扩展直接嵌入用户真实的浏览环境，而非虚拟浏览器；Claude 推出 Skill，赋予 AI 特定领域的工作规范。每一个选择都指向同一个原则——通用、开放、可定制，MCP、skill等都由其提出，现在已成行业规范。</p>
+
+      <p><strong>b.应用场景：</strong>Claude Code 率先在开发者群体中验证了 agentic AI 的价值，再通过 Cowork 扩展到所有知识工作者——先在最容易验证效果的场景跑通，再向更广的专业工作扩散。Claude Code → Cowork 的路径被竞品复刻：Codex 从编码工具拓展定位，Kimi 推出 work 模式。</p>
+
+      <p><strong>c.产品架构：</strong>Claude 将 chat、Cowork、Claude Code 集成在同一个桌面端中，构建了统一的超级入口，这种一体化设计避免了能力分散在多个独立产品中。</p>
+
+      <p><strong>成功的商业模式：</strong>在 AI 助手市场，不靠用户规模和流量补贴，靠产品能力和专业用户的付费意愿，同样可以建立一家万亿美元估值的公司。</p>
+
+      <br> 
+      <br>
+      <br>    
+
+      <p><strong>3.潜在风险与挑战</strong><br>
+      <strong>C 端用户规模与 ChatGPT 存在量级差距。</strong> Claude 的个人用户月活约 3000 万，ChatGPT 周活 9 亿[6]——虽然对 Claude 的使用更多地集中在 API 和云平台渠道，但即便如此，C 端规模的差距是客观存在的。</p>
+
+      <p><strong>收入高度集中于企业大客户。</strong> 企业客户贡献约 80% 收入（据 Reuters 报道），百万美元级大客户的数量仍在快速增长。这意味着高质量的收入结构，但也意味着少数客户的变动可能带来显著波动。</p>
+
+      <p><strong>MCP 和 Skill 都是开放标准，先发优势不等于持久壁垒。</strong> 两者均由 Anthropic 率先提出并推广，在 app 中， Claude 的支持做得最好，但 MCP与 skill 并没有帮助 Claude 建立起持久的壁垒——ChatGPT 已快速跟进 MCP 和 Skill，后来者的接入成本趋近于零。</p>
+
+      <!-- ==================== ChatGPT ==================== -->
+      <h2 id="chatgpt" class="thoughts-h2">ChatGPT</h2>
+
+      <p><strong>1.优势：模型能力、用户规模和研发资源</strong><br>
+      <strong>模型层处于第一梯队。</strong> 在语言模型上，GPT-5.5 在 benchmark 和 LM Arena 上的表现稳居前列；在多模态能力上，OpenAI 优势明显——GPT Image 2 的图片生成能力是四家中最强的， Sora 2 模型的视频生成能力也处于第一梯队。</p>
+
+      <p><strong>领先的用户规模可能是最难被复制的优势。</strong> ChatGPT 周活 9 亿，全球品牌认知度最高，大量知名企业在使用 ChatGPT，用户习惯与数据积累都构成转换成本。即使 ChatGPT 应用层能力现在暂时落后，但庞大的用户基数也意味着：一旦能力补齐，用户规模会立刻转化为竞争优势。</p>
+
+      <p><strong>OpenAI 的研发资源为行业一流。</strong> 顶尖的人才密度、充足的资金，以及 Codex 在短时间内补齐应用层能力所展现的执行力，都说明 OpenAI 的研发能力、组织能力仍然一流。</p>
+
+      <br> 
+      <br>
+      <br>    
+
+      <p><strong>2.短板：ChatGPT 应用层的关键缺位</strong><br>
+      从本文的分析框架看，ChatGPT 在应用层突破信息和行动边界的多个关键维度上明显落后于 Claude——而 Codex 在这些维度上快速跟进，这也是 ChatGPT 与 Codex 走向合并的重要原因。但产品的分裂已经造成了代价：Codex 才是真正具备 agent 能力和生产力价值的产品，大量用户却留在功能更弱的 ChatGPT 上——更好的能力没有触达更多的用户。</p>
+
+      <br> 
+      <br>
+      <br>    
+
+      <p><strong>3.隐忧：多个早期方案效果不佳</strong></p>
+
+      <ul>
+        <li>Operator （后升级为 Agent mode）采用虚拟浏览器方案，可用性远不如 Chrome 扩展直接嵌入用户真实环境；</li>
+        <li>GPT Store 高调上线，如今快放弃维护等</li>
+      </ul>
+
+      <p><strong>与此同时，OpenAI 在多个关键节点上呈现出跟随而非引领的姿态，比如：</strong></p>
+
+      <ul>
+        <li>MCP 、skill 是 Anthropic 提出的，OpenAI 之后才跟进采纳；</li>
+        <li>总裁明确将重组方向对齐到 agentic capabilities——而这个方向已被竞品率先验证。</li>
+      </ul>
+
+      <br> 
+      <br>
+      <br>  
+
+      <p><strong>4.ChatGPT 和 Codex 合并后的潜力不容低估</strong><br>
+      Codex 在应用层两边界的各维度上，已经快速跟上 Claude—— Claude 支持的功能，Codex基本上都支持。一旦合并完成，ChatGPT 将同时拥有9亿用户的规模和 Codex 的 agent 能力——这个组合的潜力不容低估。经历过一段波折后，OpenAI 依然具有强大的竞争力。</p>
+
+      <!-- 可视化 B：周活对比条形图 -->
+      <figure class="wau-figure">
+        <div class="wau-row">
+          <span class="wau-name">ChatGPT</span>
+          <div class="wau-bar wau-bar--chatgpt">
+            <span class="wau-value">≈ 900M / week</span>
+          </div>
+        </div>
+
+        <div class="wau-gap">
+          <svg class="wau-arrow" width="80" height="120" viewBox="0 0 64 92">
+            <line x1="31" y1="86" x2="31" y2="18"
+                  stroke="#1C1C1A" stroke-width="6"
+                  stroke-linecap="round"/>
+            <path d="M31 10 L 17 28 M31 10 L 45 28"
+                  fill="none" stroke="#1C1C1A" stroke-width="6"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="wau-multiple">≈ 180× the users</span>
+        </div>
+
+        <div class="wau-row">
+          <span class="wau-name">Codex</span>
+          <div class="wau-bar wau-bar--codex">
+            <span class="wau-value">≈ 5M / week</span>
+          </div>
+        </div>
+
+        <p class="wau-note">ChatGPT 周活约为 Codex 的 180 倍，但两者披露时间不同（ChatGPT 2026.2.28，Codex 2026.6.2）。条形长度为示意，Codex 实际占比远小于图示。</p>
+      </figure>
+      <p style="text-align:center; font-size:var(--text-sm); color:var(--color-text-secondary); margin-top:0;">ChatGPT 与 Codex 周活用户量对比</p>
+
+      <!-- ==================== 豆包 ==================== -->
+      <h2 id="doubao" class="thoughts-h2">豆包</h2>
+
+      <p><strong>1.独特优势：流量、内容生态与多模态生成的闭环——豆包前期成功的核心逻辑</strong><br>
+      豆包是四家中最独特的产品。</p>
+
+      <p>字节系的流量是基础。豆包借助抖音等平台的导流优势，迅速成为国内最大的 AI 应用。这种深度绑定甚至让豆包成为了一个形象 IP，频繁出现在抖音等平台上。</p>
+
+      <p>在此基础上，豆包的多模态生成能力与字节生态形成了相互作用。字节跳动拥有四家中唯一且极为丰富的内容分发与消费平台——抖音、剪映、红果短剧、汽水音乐等，而豆包也拥有四家中最全面的多模态生成能力——图片、视频、音乐。AI 生成内容，生态负责分发，生态给豆包带来流量、豆包又以 AI 能力反哺生态——三者构成了其他三家都不具备的闭环。ChatGPT 研发 Sora 2 模型，最后却又关停 Sora 应用，正是因为其不具备和字节跳动一样成熟的内容消费生态——有生成能力，却没有承接出口。</p>
+
+      <br> 
+      <br>
+      <br>    
+
+      <p><strong>2.战略转向：转型信号清晰，但尚未落地</strong><br>
+      豆包最初的产品定位偏向内容与娱乐，但转型的意图已经非常明确。2026年5、6月，豆包官方宣布即将推出订阅方案以及"豆包专业版"——覆盖软件开发、数据分析、专业设计、流程自动化、金融分析、科学研究等专业工作场景。</p>
+
+      <p>但战略声明与产品现实之间仍有落差。截至目前，豆包在应用层突破两个边界的维度上尚未出现实质性的补齐动作——专业版所承诺的能力，还没有在产品中明确体现。 Agentic AI 已经成为 AI 通用助手最清晰的演进方向，这也是豆包必须迈出的一步。</p>
+
+      <p>另一方面，在本分析的实测中，已经可以观察到专业版的内测迹象，预计豆包将会迎来一轮密集更新，并且变化幅度较大。</p>
+
+      <br> 
+      <br>
+      <br>    
+
+      <p><strong>3.当前差距：豆包在模型层和应用层都面临挑战</strong><br>
+      模型层方面，豆包的语言模型处于第二梯队的后半部分。本文的 benchmark 数据和 LM Arena 排名均显示，seed 2.0 与 Anthropic、OpenAI 的旗舰模型存在明显差距，与 k 2.6 也有一定的差距。</p>
+
+      <p>应用层方面，豆包在突破信息和行动边界的维度中缺席最多。缺乏成熟的外部应用接入方案、落后的记忆系统层级设计、没有浏览器扩展、没有 computer use 等——豆包对专业工作的支持非常有限。当然，字节的生态也会帮助豆包扩展应用层，但现在还没发生。如果字节将飞书、抖音、剪映等深度打通，这种生态内整合的价值可能不亚于 MCP ——但这条路只有拥有生态的大厂才能走。</p>
+
+      <p>能力 = 模型层 × 应用层。当两层都存在短板时，乘法效应意味着综合体验的差距被进一步放大。</p>
+
+      <!-- ==================== Kimi ==================== -->
+      <h2 id="kimi" class="thoughts-h2">Kimi</h2>
+
+      <p><strong>1.战略方向最接近 Claude</strong><br>
+      月之暗面和Anthropic 一样，都是独立的 AI 公司——没有大厂生态依托，没有流量入口，完全靠模型能力和产品体验立足。他们的战略高度相似，聚焦专业知识工作，强调"生产力场景优先"，将资源集中在语言模型和 agent 能力上，不做多模态生成。</p>
+
+      <br> 
+      <br>
+      <br>    
+
+      <p><strong>2.模型层：全球第二梯队，K2.5/K2.6 证明其研发能力</strong><br>
+      从本文的 benchmark 和 LM Arena 数据看，K2.6 与 Anthropic、OpenAI 的旗舰模型仍有差距，但在第二梯队中明显处于领先位置。更值得关注的是 K2.5 以来的爆发：月之暗面估值从 2025 年底约 $4.3B 升至 2026 年 5 月约 $20B，并于 6 月被报道正寻求以 $30B 估值融资[8]。这说明 K2.5/K2.6 已显著提升其商业表现与资本市场认可度。杨植麟受邀在 GTC 演讲，是唯一的中国独立大模型公司创始人。在 OpenAI 与 Anthropic 密集迭代、国内大厂和其他 AI 公司步步紧逼的双重压力下，K2.5/K2.6 的国际存在感强，敢于和国际顶尖模型比较，证明了其强大的模型研发能力。</p>
+
+      <p><strong>应用层：快速补齐，服务知识工作</strong><br>
+      WebBridge、work 模式等在短时间内密集上线，信息和行动边界的多个维度正在被逐一覆盖，快速跟上 Claude 和 Codex 的步伐。Kimi 的应用层建设方向始终围绕专业工作场景，独特的"专业数据库"功能——接入同花顺、天眼查等专业数据源——也是针对国内知识工作者的实际需求，扩展信息边界的巧妙选择。但诚实来看，在直连外部应用、记忆系统和 computer use 等维度上，仍有明显缺口。</p>
+
+      <br> 
+      <br>
+      <br>    
+
+      <p><strong>3.现实困境：中国的数字生态可能阻碍其在应用层突破信息和行动边界</strong></p>
+
+      <ul>
+        <li>受网络环境影响，国内的 Saas 生态和国外的有很大差别，因此不能直接、完全复用国外 MCP 生态</li>
+        <li>国内的优质 SaaS 少、渗透率远低于海外，缺少明星 SaaS 产品；国内高频应用又大多归属大厂体系，对外开放意愿低</li>
+          <li>国内软件生态整体也较海外更为封闭</li>
+        <li>中国企业偏好本地部署与内网隔离，数据散落在本地文件与内网系统中</li>
+      </ul>
+
+      <p>对独立 AI 公司而言，这是一道绕不开的难题。</p>
+
+      <br> 
+      <br>
+      <br>  
+
+      <p><strong>4.有困难，但中国专业知识工作者的市场足够大，也确实需要一个本土的 AI 助手</strong><br>
+      Claude 做得再好，也不可能进入中国市场。国内的专业知识工作者需要一个真正服务于本土场景的 AI 助手——贴近国内的工作流、适配国内的数据环境、解决国内用户的实际问题。Kimi 目前已经具备了竞争的基础：模型层有 K2.5/K2.6 的实力支撑且仍在持续迭代，应用层有专业数据库、work 模式、WebBridge等的跟进。在这个赛道上，它已经占据了一个不错的身位。</p>
+
+      <!-- ==================== 数据来源 ==================== -->
+      <section class="footnotes">
+        <h2>数据来源</h2>
+        <ol>
+          <li>Reuters：《Anthropic aims to nearly triple annualized revenue in 2026》</li>
+          <li>Anthropic：《Anthropic raises $30 billion in Series G funding》</li>
+          <li>Anthropic：《Anthropic raises $65B in Series H funding》</li>
+          <li>OpenAI：《OpenAI raises $122 billion to accelerate the next phase of AI》</li>
+          <li>Anthropic：Series F、Google与Broadcom合作、Series H公告</li>
+          <li>TechCrunch：《ChatGPT reaches 900M weekly active users》</li>
+          <li>OpenAI：《Codex is becoming a productivity tool for everyone》</li>
+          <li>TechCrunch、财新：月之暗面融资与估值</li>
+        </ol>
+      </section>
+
+      <!-- 页面跳转 -->
+      <nav class="page-nav">
+        <a class="page-nav-link" href="multimodal.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">多模态生成</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

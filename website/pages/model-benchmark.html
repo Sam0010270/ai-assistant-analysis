@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旗舰模型 benchmark 数据 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body>
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1 style="margin-bottom: 80px;">旗舰模型 benchmark 数据</h1>
+
+      <p><strong>本章聚焦大语言模型，覆盖七个能力维度：推理与学术知识、代码、工具使用、事实性、长文本、图像理解以及视频理解。</strong></p>
+      <p>数据选取遵循两个原则：各榜单尽量覆盖四家厂商，优先采用最新旗舰模型的分数，但厂商间模型版本未必能完全对齐（受数据缺失限制）；优先未饱和、仍有区分度的榜单。</p>
+
+      <!-- ==================== 推理与学术知识 ==================== -->
+      <h2 id="reasoning">推理与学术知识</h2>
+
+      <div class="bench-chart-pair">
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">GPQA Diamond</h3>
+          <p>研究生级科学推理多项选择题（物理、化<br>学、生物），人类 PhD 专家基线约 69.7%。</p>
+          <div class="bench-bars" style="--bar-count: 6;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">94.2%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (94.2 - 85) / (96 - 85));"></div>
+              <span class="bench-bar-label">Opus 4.7</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">93.6%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (93.6 - 85) / (96 - 85));"></div>
+              <span class="bench-bar-label">Opus 4.8</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">93.6%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (93.6 - 85) / (96 - 85));"></div>
+              <span class="bench-bar-label">GPT 5.5</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">92.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (92.8 - 85) / (96 - 85));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">90.5%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (90.5 - 85) / (96 - 85));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">88.9%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (88.9 - 85) / (96 - 85));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">HLE no tools</h3>
+          <p>2500 道跨学科顶尖难题（数学、物理、人文<br>等），无工具，测模型参数化知识的上限。</p>
+          <div class="bench-bars" style="--bar-count: 6;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">49.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (49.8 - 28) / (54 - 28));"></div>
+              <span class="bench-bar-label">Opus 4.8</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">46.9%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (46.9 - 28) / (54 - 28));"></div>
+              <span class="bench-bar-label">Opus 4.7</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">41.1%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (41.1 - 28) / (54 - 28));"></div>
+              <span class="bench-bar-label">GPT 5.5</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">39.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (39.8 - 28) / (54 - 28));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">34.7%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (34.7 - 28) / (54 - 28));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">32.4%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (32.4 - 28) / (54 - 28));"></div>
+              <span class="bench-bar-label bench-tooltip-trigger">
+                Seed 2.0 Pro*
+                <span class="bench-tooltip">text-only 模式，其他模型为 full 模式，<br>其 32.4% 分数可能略微偏高。</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 代码 ==================== -->
+      <h2 id="code">代码</h2>
+
+      <div class="bench-chart-pair">
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">LiveCodeBench 综合</h3>
+          <p>考察模型在真实编程题上的能力。</p>
+          <div class="bench-bars" style="--bar-count: 3;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">85%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (85 - 72) / (88 - 72));"></div>
+              <span class="bench-bar-label">K2.5</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">84%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (84 - 72) / (88 - 72));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">76%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (76 - 72) / (88 - 72));"></div>
+              <span class="bench-bar-label">Opus 4.6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">LiveCodeBench v6</h3>
+          <p>LiveCodeBench 第六版测试集评分，评估模型<br>代码解题能力。</p>
+          <div class="bench-bars" style="--bar-count: 3;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">89.6%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (89.6 - 82) / (92 - 82));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">87.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (87.8 - 82) / (92 - 82));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">85.0%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (85 - 82) / (92 - 82));"></div>
+              <span class="bench-bar-label">K2.5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 工具使用 ==================== -->
+      <h2 id="tool-use">工具使用</h2>
+
+      <div class="bench-chart-pair">
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">MCPMark</h3>
+          <p>接入真实 MCP 服务器的工具调用评测<br>（Pass@1），测模型与外部工具协作的<br>准确性。</p>
+          <div class="bench-bars" style="--bar-count: 4;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">62.5%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (62.5 - 50) / (66 - 50));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">56.7%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (56.7 - 50) / (66 - 50));"></div>
+              <span class="bench-bar-label">Opus 4.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">55.9%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (55.9 - 50) / (66 - 50));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">54.7%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (54.7 - 50) / (66 - 50));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">Toolathlon</h3>
+          <p>多应用、多步骤长链路工具使用基准，评估<br>真实Agent 任务的单次通过率（Pass@1）。</p>
+          <div class="bench-bars" style="--bar-count: 5;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">59.9%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (59.9 - 46) / (64 - 46));"></div>
+              <span class="bench-bar-label">Opus 4.8</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">55.6%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (55.6 - 46) / (64 - 46));"></div>
+              <span class="bench-bar-label">GPT 5.5</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">54.6%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (54.6 - 46) / (64 - 46));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">52.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (52.8 - 46) / (64 - 46));"></div>
+              <span class="bench-bar-label">Opus 4.7</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">50.0%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (50 - 46) / (64 - 46));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 事实性 ==================== -->
+      <h2 id="factuality">事实性</h2>
+
+      <div class="bench-chart">
+        <h3 class="comp-sketch-label">SimpleQA Verified</h3>
+        <p>简短事实性问答，测模型陈述事实的准确率。</p>
+        <div class="bench-bars" style="--bar-count: 6;">
+          <div class="bench-bar">
+            <span class="bench-bar-score">63.1%</span>
+            <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (63.1 - 28) / (68 - 28));"></div>
+            <span class="bench-bar-label">GPT 5.5</span>
+          </div>
+          <div class="bench-bar">
+            <span class="bench-bar-score">50.6%</span>
+            <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (50.6 - 28) / (68 - 28));"></div>
+            <span class="bench-bar-label">Opus 4.7</span>
+          </div>
+          <div class="bench-bar">
+            <span class="bench-bar-score">44.8%</span>
+            <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (44.8 - 28) / (68 - 28));"></div>
+            <span class="bench-bar-label">GPT 5.4</span>
+          </div>
+          <div class="bench-bar">
+            <span class="bench-bar-score">44.5%</span>
+            <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (44.5 - 28) / (68 - 28));"></div>
+            <span class="bench-bar-label">Opus 4.8</span>
+          </div>
+          <div class="bench-bar">
+            <span class="bench-bar-score">36.0%</span>
+            <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (36 - 28) / (68 - 28));"></div>
+            <span class="bench-bar-label">Seed 2.0 Pro</span>
+          </div>
+          <div class="bench-bar">
+            <span class="bench-bar-score">33.9%</span>
+            <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (33.9 - 28) / (68 - 28));"></div>
+            <span class="bench-bar-label">K2.5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 长文本 ==================== -->
+      <h2 id="long-context">长文本</h2>
+
+      <div class="bench-chart-pair" style="margin-bottom: 96px;">
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">AA-LCR</h3>
+          <p>长上下文理解与关键信息检索评测。</p>
+          <div class="bench-bars" style="--bar-count: 6;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">74.3%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (74.3 - 62) / (78 - 62));"></div>
+              <span class="bench-bar-label">GPT 5.5</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">74.0%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (74 - 62) / (78 - 62));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">70.3%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (70.3 - 62) / (78 - 62));"></div>
+              <span class="bench-bar-label">Opus 4.7</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">69.7%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (69.7 - 62) / (78 - 62));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">67.7%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (67.7 - 62) / (78 - 62));"></div>
+              <span class="bench-bar-label">Opus 4.8</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">65.3%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (65.3 - 62) / (78 - 62));"></div>
+              <span class="bench-bar-label">Seed Code</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">Graph Walks BFS（1M）</h3>
+          <p>超长上下文图遍历推理任务，测模型在极长<br>文本下的结构性推理能力。</p>
+          <div class="bench-bars" style="--bar-count: 2;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">68.1%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (68.1 - 38) / (74 - 38));"></div>
+              <span class="bench-bar-label">Opus 4.8</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">45.4%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (45.4 - 38) / (74 - 38));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bench-chart-pair">
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">Graph Walks BFS（&lt;128k）</h3>
+          <p>标准长上下文（&lt;128k tokens）图遍历推理<br>任务。</p>
+          <div class="bench-bars" style="--bar-count: 2;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">93.0%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (93 - 62) / (96 - 62));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">68.9%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (68.9 - 62) / (96 - 62));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">LongBench v2</h3>
+          <p>综合性长文本理解基准，涵盖多类长文档<br>问答任务。</p>
+          <div class="bench-bars" style="--bar-count: 3;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">64.4%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (64.4 - 58) / (67 - 58));"></div>
+              <span class="bench-bar-label">Opus 4.5</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">63.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (63.8 - 58) / (67 - 58));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">61.0%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (61 - 58) / (67 - 58));"></div>
+              <span class="bench-bar-label">K2.5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 图像理解 ==================== -->
+      <h2 id="image-understanding">图像理解</h2>
+
+      <div class="bench-chart-pair">
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">MMMU-Pro（no tools）</h3>
+          <p>多学科多模态理解题，无工具，考查模型<br>视觉与跨学科知识融合推理能力。</p>
+          <div class="bench-bars" style="--bar-count: 5;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">81.2%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (81.2 - 70) / (84 - 70));"></div>
+              <span class="bench-bar-label">GPT 5.5</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">81.2%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (81.2 - 70) / (84 - 70));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">79.4%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (79.4 - 70) / (84 - 70));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">78.2%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (78.2 - 70) / (84 - 70));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">73.9%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (73.9 - 70) / (84 - 70));"></div>
+              <span class="bench-bar-label">Opus 4.6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">MathVision（no tools）</h3>
+          <p>数学视觉推理基准，无工具，测模型对图表<br>与数学题的理解与求解能力。</p>
+          <div class="bench-bars" style="--bar-count: 4;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">92.0%</span>
+              <div class="bench-bar-fill bench-bar-fill--openai" style="height: calc((220px - 36px) * (92 - 65) / (96 - 65));"></div>
+              <span class="bench-bar-label">GPT 5.4</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">88.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (88.8 - 65) / (96 - 65));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">87.4%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (87.4 - 65) / (96 - 65));"></div>
+              <span class="bench-bar-label">K2.6</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">71.2%</span>
+              <div class="bench-bar-fill bench-bar-fill--anthropic" style="height: calc((220px - 36px) * (71.2 - 65) / (96 - 65));"></div>
+              <span class="bench-bar-label">Opus 4.6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 视频理解 ==================== -->
+      <h2 id="video-understanding">视频理解</h2>
+
+      <div class="comp-note">
+        <p><strong>注</strong>：Claude 和 GPT 旗舰模型均不支持原生视频输入，故未纳入本维度评测。</p>
+      </div>
+
+      <div class="bench-chart-pair">
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">LongVideoBench</h3>
+          <p>长视频问答基准，测模型对长时序视觉<br>内容的理解与推理能力。</p>
+          <div class="bench-bars" style="--bar-count: 2;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">80.3%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (80.3 - 76) / (84 - 76));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">79.8%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (79.8 - 76) / (84 - 76));"></div>
+              <span class="bench-bar-label">K2.5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bench-chart">
+          <h3 class="comp-sketch-label">LVBench</h3>
+          <p>超长视频理解基准，评估模型对视频中关键<br>信息的检索与推理能力。</p>
+          <div class="bench-bars" style="--bar-count: 2;">
+            <div class="bench-bar">
+              <span class="bench-bar-score">76.4%</span>
+              <div class="bench-bar-fill bench-bar-fill--bytedance" style="height: calc((220px - 36px) * (76.4 - 72) / (80 - 72));"></div>
+              <span class="bench-bar-label">Seed 2.0 Pro</span>
+            </div>
+            <div class="bench-bar">
+              <span class="bench-bar-score">75.9%</span>
+              <div class="bench-bar-fill bench-bar-fill--moonshot" style="height: calc((220px - 36px) * (75.9 - 72) / (80 - 72));"></div>
+              <span class="bench-bar-label">K2.5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 结论 ==================== -->
+
+      <hr class="bench-divider"style="margin-top: 160px;">
+
+      <div class="comp-quote">
+        <div>
+          <p><strong>1.benchmark 数据很难完全统一口径，这是评测生态的结构性现实</strong><br>实际采集中，单一榜单几乎不可能凑齐四家当前旗舰——各厂商对榜单的选择不同，中美厂商常测的榜单重合度不高；第三方测评可信度较高，但覆盖面有限
+            ，很难同时囊括四家最新旗舰；同一榜单还存在子集划分、模型推理强度可调等变量，进一步增加了横向对齐的难度。</p>
+          <p>此外，Benchmark 报告有营销嫌疑，部分厂商偏向于公布对自己有利的数据。跨厂商对比的口径统一只能近似、无法严格做到。</p>
+          <br>
+          <br>
+          <p>仅从 benchmark 分数上分析，可以得出以下结论：</p>
+          <p><strong>2.Anthropic 与 OpenAI 整体领先，字节跳动、月之暗面有一定的差距</strong><br>Anthropic 和 OpenAI 在绝大多数榜单上保持领先。字节跳动、月之暗面差距幅度因榜单而异，比如在 HLE no tools 上差距较大，
+            在 MMMU-Pro no tools 上差距较小，甚至在 MathVision no tools 上实现对 Anthropic 的双反超。</p>
+          <p><strong>3.K2.6 综合表现优于 seed 2.0，且是开源模型逼近闭源旗舰的样本</strong><br>K2.6 作为开源模型，在多个榜单上表现亮眼，且整体好于 seed 2.0。</p>
+          <p><strong>4.字节在多模态理解上有优势</strong><br>在四家同场的视觉推理榜单上，字节接近甚至反超第一梯队。原生视频理解，Anthropic / OpenAI 的最新语言模型不支持视频输入，seed 2.0 以微弱优势领先 K2.5。</p>
+          <br>
+          <br>
+          <p>此外，</p>
+          <p><strong>5.前沿模型的代码评测已发生结构性转变</strong><br>HumanEval、 MBPP 等传统 benchmark 因饱和而停止更新，无法再区分顶级模型。竞争转向 agentic 类评测（SWE-bench 等）——不再"解一道题"，而是在真实代码库中完成工程任务，更贴近实际软件工程。</p>
+        </div>
+      </div>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="model-info.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">旗舰模型基本信息</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="model-arena.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">LM Arena</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>

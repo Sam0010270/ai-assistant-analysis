@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品概况 — AI 通用助手分析</title>
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../assets/fonts.css">
+</head>
+<body>
+
+  <svg class="sketch-defs" aria-hidden="true">
+    <defs>
+      <filter id="sketch">
+        <feTurbulence type="turbulence" baseFrequency="0.018" numOctaves="3" seed="5" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <button class="nav-toggle" aria-label="打开导航">
+    <span class="nav-toggle-icon"></span>
+  </button>
+  <div class="nav-overlay"></div>
+
+  <nav class="site-nav" id="siteNav"></nav>
+
+  <main class="content">
+    <article class="article">
+
+      <h1>产品概况</h1>
+
+      <h2 id="timeline">发布时间</h2>
+
+      <figure class="comp-timeline">
+        <div class="timeline-track">
+          <div class="timeline-node">
+            <span class="timeline-date">2022.11</span>
+            <span class="timeline-product tl-t1">ChatGPT</span>
+            <span class="timeline-company">OpenAI</span>
+          </div>
+          <div class="timeline-node">
+            <span class="timeline-date">2023.03</span>
+            <span class="timeline-product tl-t3 tl-r2">Claude</span>
+            <span class="timeline-company">Anthropic</span>
+          </div>
+          <div class="timeline-node">
+            <span class="timeline-date">2023.08</span>
+            <span class="timeline-product tl-t2 tl-r3">豆包</span>
+            <span class="timeline-company">字节跳动</span>
+          </div>
+          <div class="timeline-node">
+            <span class="timeline-date">2023.10</span>
+            <span class="timeline-product tl-t5 tl-r4">Kimi</span>
+            <span class="timeline-company">月之暗面</span>
+          </div>
+          <div class="timeline-node">
+            <span class="timeline-date">2025.05</span>
+            <span class="timeline-product tl-t4 tl-r5">Codex</span>
+            <span class="timeline-company">OpenAI</span>
+          </div>
+        </div>
+      </figure>
+
+      <h2 id="subscription">订阅方案</h2>
+
+      <div class="comp-table-pair">
+        <div class="comp-table-col">
+          <h4>ChatGPT</h4>
+          <table class="comp-table comp-table--relaxed">
+            <thead>
+              <tr>
+                <th>档位</th>
+                <th>价格</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Free</td><td>$0</td></tr>
+              <tr><td>Go</td><td>$8 / 月</td></tr>
+              <tr><td>Plus</td><td>$20 / 月</td></tr>
+              <tr><td>Pro</td><td>$100 / 月（5x）或 $200 / 月（20x）</td></tr>
+            </tbody>
+          </table>
+          <div class="comp-note"><p>与 Codex 共享订阅</p></div>
+        </div>
+        <div class="comp-table-col">
+          <h4>Claude</h4>
+          <table class="comp-table comp-table--relaxed">
+            <thead>
+              <tr>
+                <th>档位</th>
+                <th>价格</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Free</td><td>$0</td></tr>
+              <tr><td>Pro</td><td>$20 / 月（月付）或 $17 / 月（年付）</td></tr>
+              <tr><td>Max</td><td>$100 / 月（5x）或 $200 / 月（20x）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="comp-quote">
+        <p><strong>ChatGPT 和 Claude 的订阅方案基本一样，仅 ChatGPT 多一档最便宜套餐。两家都有面向团队、企业的特殊方案。</strong></p>
+      </div>
+
+      <div class="comp-table-pair">
+        <div class="comp-table-col">
+          <h4>豆包</h4>
+          <table class="comp-table comp-table--relaxed">
+            <thead>
+              <tr>
+                <th>档位</th>
+                <th>价格</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>基础版</td><td>¥0</td></tr>
+              <tr><td>豆包专业版 · 标准套餐</td><td>¥68 / 月（月付）或 ¥688 / 年（年付）</td></tr>
+              <tr><td>豆包专业版 · 加强套餐</td><td>¥200 / 月（月付）或 ¥2048 / 年（年付）</td></tr>
+              <tr><td>豆包专业版 · 高级套餐</td><td>¥500 / 月（月付）或 ¥5088 / 年（年付）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="comp-table-col">
+          <h4>Kimi</h4>
+          <table class="comp-table comp-table--relaxed">
+            <thead>
+              <tr>
+                <th>档位</th>
+                <th>价格</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Free</td><td>¥0</td></tr>
+              <tr><td>Andante</td><td>¥49 / 月（月付）或 ¥39 / 月（年付）</td></tr>
+              <tr><td>Moderato</td><td>¥99 / 月（月付）或 ¥79 / 月（年付）</td></tr>
+              <tr><td>Allegretto</td><td>¥199 / 月（月付）或 ¥159 / 月（年付）</td></tr>
+              <tr><td>Allegro</td><td>¥699 / 月（月付）或 ¥559 / 月（年付）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="comp-quote">
+        <p><strong>豆包和 Kimi 的订阅方案相似度较高， Kimi 的套餐更加丰富一些。</strong></p>
+      </div>
+
+      <h2 id="users">核心用户群</h2>
+
+      <p><strong>ChatGPT 是用户基数最大、覆盖最广的产品。</strong>周活 9 亿（2026年2月 OpenAI 披露），92% 的 Fortune 500 在使用。用户从学生、创作者到企业员工，几乎涵盖所有类型。</p>
+
+      <p><strong>Codex 服务于更窄的专业人群。</strong>周活超 500 万（2026年6月 OpenAI 披露），开发者仍是最大用户群，但知识工作者已占约 20% 且增速超过开发者的 3 倍。</p>
+
+      <div class="comp-note">
+        <p>OpenAI 已宣布将 Codex 与 ChatGPT 合并。</p>
+      </div>
+
+      <p><strong>Claude 以专业知识工作者和开发者为核心用户。</strong>消费端月活约 3000 万（第三方估算），但企业客户超 30 万家、贡献约 80% 收入——大量使用发生在 API 和云平台渠道，消费端月活远不能代表其实际用户量。</p>
+
+      <p><strong>豆包是中国用户规模最大的 AI 应用，月活 3.45 亿（2026年一季度 QuestMobile），全球仅次于 ChatGPT。</strong>借助抖音等字节系平台的引流，用户覆盖面广，向下沉市场渗透明显。官方定位为"面向全民的全模态通用 AI 助手"，近期宣布推出面向专业工作的订阅方案，转型信号明确。</p>
+
+      <p><strong>Kimi 月活约 834 万（2026年一季度 QuestMobile），是五款产品中用户规模最小的。</strong>创始人杨植麟明确表示"不以绝对用户数量为目标，聚焦 agent，追求生产力价值"。实际定位与战略更接近 Claude——服务专业知识工作者，以模型能力和生产力价值驱动营收增长，而非流量。</p>
+
+      <nav class="page-nav">
+        <a class="page-nav-link" href="selection.html">
+          <span class="page-nav-label">上一页</span>
+          <span class="page-nav-title">入选逻辑</span>
+        </a>
+        <a class="page-nav-link page-nav-link--next" href="model.html">
+          <span class="page-nav-label">下一页</span>
+          <span class="page-nav-title">模型层</span>
+        </a>
+      </nav>
+
+    </article>
+  </main>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/scroll-animate.js"></script>
+</body>
+</html>
