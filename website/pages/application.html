@@ -173,9 +173,14 @@
       </figure>
 
       <p><strong>应用层是一座冰山。</strong><br>
-      水下是实现应用运行的工程机制——Agent Loop、上下文管理、工具编排、状态管理、安全控制等。它们重要，但用户能直接感知到的少，且很少直接反映到 app 功能上，外部也难以客观、系统地评价。
-      而露出水面的，是用户可以直接感知的能力：最大的山峰代表对信息和行动边界的突破，扩展了模型能力，也是本章节的分析主线；小山峰则代表其他能力，比如定时任务和多模态生成。<br>
-      工程机制并未被忽略——它是水上山峰的底座，工程机制的好坏体现在任务的完成质量中。</p>
+      模型是一个无状态函数，每次调用都是独立的运算——接收输入、然后输出，仅此而已。并且，模型存在两个固有边界：<strong>信息边界</strong>——只有参数化知识，没有长期记忆、用户私有信息和实时信息；<strong>行动边界</strong>——只能输出 token 序列，不具备真实的执行能力。
+      <br>
+      所以，为了克服模型的局限性，应用层在模型之上构建了完整的工程机制（Agent Loop、上下文管理、工具编排、状态管理、安全控制等）将模型变成一个能持续运转、自主决策的系统，并帮助模型突破上述两个边界。工程机制很重要，但用户能直接感知到的少，且很少直接反映到 app 功能上，外部也难以客观、系统地评价，因此沉在水下。
+      <br>
+      而露出水面的，是可以被直接感知、相对容易被客观评估、同时也非常重要的能力：最大的山峰代表对信息和行动边界的突破，也是本章节的分析主线；小山峰则代表其他能力，比如定时任务和多模态生成。
+      <br>
+      工程机制并未被忽略——它是水上冰山的底座，其好坏也在一定程度上，体现在上面功能的质量中。
+    </p>
 
       <h2 id="info-boundary">信息边界</h2>
 
@@ -187,7 +192,7 @@
 
       <div class="model-nav-links">
         <a class="model-nav-btn t1 r1" href="app-memory.html">
-          <span class="model-nav-btn-title">记忆系统</span>
+          <span class="model-nav-btn-title">长期记忆系统</span>
           <span class="model-nav-btn-arrow">→</span>
         </a>
         <a class="model-nav-btn t2 r2" href="app-private-info.html">
@@ -260,7 +265,7 @@
         </a>
         <a class="page-nav-link page-nav-link--next" href="app-memory.html">
           <span class="page-nav-label">下一页</span>
-          <span class="page-nav-title">记忆系统</span>
+          <span class="page-nav-title">长期记忆系统</span>
         </a>
       </nav>
 

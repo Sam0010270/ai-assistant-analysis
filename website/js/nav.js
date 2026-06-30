@@ -28,7 +28,7 @@
             {
               title: '信息边界', href: '/pages/application.html#info-boundary',
               children: [
-                { title: '记忆系统', href: '/pages/app-memory.html' },
+                { title: '长期记忆系统', href: '/pages/app-memory.html' },
                 { title: '用户私有信息', href: '/pages/app-private-info.html' },
                 { title: '实时信息', href: '/pages/app-realtime.html' }
               ]
