@@ -841,7 +841,8 @@ h2 + .comp-sketch-label {
   color: #fff;
   font-size: 16px;
   font-weight: 700;
-  padding: 6px 18px;
+  line-height: var(--leading-normal);
+  padding: 10px 20px;
   margin-bottom: var(--space-4);
 }
 
@@ -850,6 +851,7 @@ h2 + .comp-sketch-label {
   position: absolute;
   inset: 0;
   background: #3A3836;
+  border: 2.8px solid rgba(0, 0, 0, 0.1);
   border-radius: 16px 10px 18px 8px;
   filter: url(#sketch);
   z-index: -1;
@@ -881,6 +883,41 @@ h2 + .comp-sketch-label {
 
 .comp-table-pair:nth-of-type(2) .comp-table-col:nth-child(2) h4 {
   transform: rotate(-0.8deg);
+}
+
+/* ===== 独立表格标题（与并排表格 h4 同款手绘风） ===== */
+
+.comp-table-label {
+  display: inline-block;
+  position: relative;
+  isolation: isolate;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: var(--leading-normal);
+  padding: 10px 20px;
+  margin-top: var(--space-20);
+  margin-bottom: var(--space-4);
+  transform: rotate(0.6deg);
+}
+
+.comp-table-label::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #3A3836;
+  border: 2.8px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px 10px 18px 8px;
+  filter: url(#sketch);
+  z-index: -1;
+}
+
+.comp-table-label--alt {
+  transform: rotate(-0.8deg);
+}
+
+.comp-table-label--alt::after {
+  border-radius: 10px 18px 8px 16px;
 }
 
 /* ===== Benchmark 条形图（手绘风） ===== */
